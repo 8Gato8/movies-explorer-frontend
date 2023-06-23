@@ -1,0 +1,16 @@
+.section-heading {
+	font-size: 22px;
+	letter-spacing: -0.88px;
+	min-height: 50px;
+	border-bottom: 1px solid #dadada;
+}
+
+@media (max-width: 768px) {
+	.section-heading {}
+}
+
+@media (max-width: 398px) {
+	.section-heading {
+		font-size: 18px;
+	}
+}

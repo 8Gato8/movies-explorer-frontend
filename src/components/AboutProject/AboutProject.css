@@ -1,0 +1,142 @@
+.about-project {
+	display: grid;
+	grid-template-areas:
+		"heading heading"
+		"first-info-block second-info-block"
+		"time-bars time-bars";
+	grid-template-columns: repeat(2, auto);
+	grid-template-rows: repeat(3, auto);
+	max-width: 1280px;
+	margin: 0 auto;
+	padding: 110px 70px;
+	column-gap: 40px;
+}
+
+.about-project__section-heading {
+	margin: 0 0 70px 0;
+	grid-area: heading;
+	font-weight: normal;
+}
+
+.about-project__info-block {
+	margin: 0 0 110px 0;
+}
+
+.about-project__info-block:first-child {
+	grid-area: first-info-block;
+}
+
+.about-project__info-block:last-child {
+	grid-area: second-info-block;
+}
+
+.about-project__sub-heading {
+	font-size: 20px;
+	letter-spacing: -0.8px;
+	margin: 0 0 26px 0;
+	font-weight: normal;
+}
+
+.about-project__info {
+	margin: 0;
+	font-size: 14px;
+	line-height: 1.43;
+}
+
+.about-project__time-investment-bars {
+	text-align: center;
+	display: grid;
+	grid-template-columns: 228px 1fr;
+	row-gap: 14px;
+	grid-area: time-bars;
+}
+
+.about-project__bar {
+	font-size: 14px;
+	padding: 9px 0;
+}
+
+.about-project__bar_type_backend {
+	color: #000;
+	background-color: #3DDC84;
+	order: 1;
+}
+
+.about-project__bar_type_frontend {
+	background-color: #303030;
+	order: 2;
+}
+
+.about-project__caption {
+	margin: 0;
+	color: #8B8B8B;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 1.21;
+	order: 3;
+}
+
+@media (max-width: 768px) {
+	.about-project {
+		padding: 90px 50px;
+		column-gap: 30px;
+	}
+
+	.about-project__info-block {
+		margin-bottom: 93px;
+	}
+
+	.about-project__info {
+		font-size: 12px;
+		line-height: 1.5;
+	}
+
+	.about-project__time-investment-bars {
+		grid-template-columns: 140px 1fr;
+	}
+
+	.about-project__caption {
+		color: #A0A0A0;
+	}
+}
+
+@media (max-width: 570px) {
+	.about-project {
+		padding: 70px 18px;
+		column-gap: 0;
+		grid-template-areas:
+			"heading"
+			"first-info-block"
+			"second-info-block"
+			"time-bars";
+		grid-template-columns: auto;
+		grid-template-rows: repeat(4, auto);
+	}
+}
+
+@media (max-width: 398px) {
+	.about-project__section-heading {
+		font-size: 18px;
+		margin-bottom: 60px;
+	}
+
+	.about-project__info-block {
+		margin-bottom: 60px;
+	}
+
+	.about-project__info {
+		font-size: 11px;
+	}
+
+	.about-project__time-investment-bars {
+		grid-template-columns: 100px 1fr;
+	}
+
+	.about-project__bar {
+		font-size: 11px;
+	}
+
+	.about-project__caption {
+		font-size: 11px;
+	}
+}

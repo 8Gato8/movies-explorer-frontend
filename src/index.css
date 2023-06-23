@@ -4,6 +4,9 @@
 @import url(./vendor/fonts/fonts.css);
 
 /* general styles */
+* {
+  box-sizing: border-box;
+}
 
 body {
   position: relative;
@@ -14,18 +17,26 @@ body {
   -moz-text-size-adjust: 100%;
 }
 
-/* App.css */
+/* generalStyles */
+
+@import url(./components/generalStyles/section-heading.css);
+
+/* App */
 
 @import url(./components/App/App.css);
 
-/* Header.css */
+/* Header */
 
 @import url(./components/Header/Header.css);
 
-/* Navigation.css */
+/* Navigation */
 
 @import url(./components/Navigation/Navigation.css);
 
 /* Promo */
 
 @import url(./components/Promo/Promo.css);
+
+/* AboutProject */
+
+@import url(./components/AboutProject/AboutProject.css);
