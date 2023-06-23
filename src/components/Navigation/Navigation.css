@@ -188,6 +188,7 @@
 .nav__burger-button {
 	display: none;
 	position: absolute;
+	border: none;
 	top: 26px;
 	right: 38px;
 	width: 22px;

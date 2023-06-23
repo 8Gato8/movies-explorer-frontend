@@ -5,7 +5,7 @@ import SidebarMenu from "../SidebarMenu/SidebarMenu";
 import Menu from "../Menu/Menu";
 
 function Navigation() {
-	const [sidebar, setSidebar] = React.useState(true);
+	const [sidebar, setSidebar] = React.useState(false);
 	const isLoggedIn = React.useContext(IsLoggedInContext);
 
 	const toggleSidebar = () => setSidebar(!sidebar);

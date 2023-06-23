@@ -6,7 +6,7 @@ function Menu({
 }) {
 	return (
 		<>
-			<div onClick={toggleSidebar} className="nav__burger-button"></div>
+			<button type="button" onClick={toggleSidebar} className="nav__burger-button"></button>
 
 			<ul className="nav__list nav__list_type_logged-in nav__list_type_hidden">
 
@@ -26,4 +26,4 @@ function Menu({
 	)
 }
 
-export default Menu
+export default Menu;

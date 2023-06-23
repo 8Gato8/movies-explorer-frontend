@@ -24,11 +24,11 @@ function SidebarMenu({
 					<div className="nav__account-icon"></div>
 				</div>
 
-				<button onClick={toggleSidebar} className="nav__close-button"></button>
+				<button type="button" onClick={toggleSidebar} className="nav__close-button"></button>
 			</ul>
 
 		</>
 	)
 }
 
-export default SidebarMenu
+export default SidebarMenu;

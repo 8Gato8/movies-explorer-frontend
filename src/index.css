@@ -25,3 +25,7 @@ body {
 /* Navigation.css */
 
 @import url(./components/Navigation/Navigation.css);
+
+/* Promo */
+
+@import url(./components/Promo/Promo.css);
