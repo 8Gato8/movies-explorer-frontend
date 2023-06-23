@@ -1,0 +1,27 @@
+/*normalize and fonts*/
+
+@import url(./vendor/normalize.css);
+@import url(./vendor/fonts/fonts.css);
+
+/* general styles */
+
+body {
+  position: relative;
+  margin: 0;
+  background-color: #202020;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -moz-text-size-adjust: 100%;
+}
+
+/* App.css */
+
+@import url(./components/App/App.css);
+
+/* Header.css */
+
+@import url(./components/Header/Header.css);
+
+/* Navigation.css */
+
+@import url(./components/Navigation/Navigation.css);
