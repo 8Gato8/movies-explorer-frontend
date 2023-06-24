@@ -15,8 +15,14 @@
 	line-height: 1.67;
 	letter-spacing: -1.2px;
 	min-height: 70px;
-	border-bottom: 1px solid #424242;
+	border-bottom: 1px solid #e6e6e6;
 	margin-bottom: 20px;
+	cursor: pointer;
+	transition: opacity .2s linear;
+}
+
+.portfolio__link:hover {
+	opacity: .6;
 }
 
 .portfolio__link:last-child {

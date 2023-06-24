@@ -56,3 +56,7 @@ body {
 /* Portfolio */
 
 @import url(./components/Portfolio/Portfolio.css);
+
+/* Footer */
+
+@import url(./components/Footer/Footer.css);
