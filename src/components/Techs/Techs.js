@@ -4,9 +4,9 @@ function Techs() {
 	return (
 		<div className="techs-wrapper">
 			<section className="techs">
-				<h1 className="techs__section-heading section-heading">Технологии</h1>
+				<h2 className="techs__section-heading section-heading">Технологии</h2>
 
-				<h2 className="techs__sub-heading">7 технологий</h2>
+				<h3 className="techs__sub-heading">7 технологий</h3>
 
 				<p className="techs__info">На&nbsp;курсе веб-разработки мы&nbsp;освоили технологии, которые применили в&nbsp;дипломном проекте.</p>
 

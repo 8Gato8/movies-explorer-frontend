@@ -44,6 +44,12 @@
 	border: 1px solid #fff;
 	grid-area: link;
 	max-width: 130px;
+	cursor: pointer;
+	transition: opacity .2s linear;
+}
+
+.promo__nav-button:hover {
+	opacity: .6;
 }
 
 .promo__link {

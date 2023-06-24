@@ -44,3 +44,11 @@ body {
 /* Techs */
 
 @import url(./components/Techs/Techs.css);
+
+/* AboutMe */
+
+@import url(./components/AboutMe/AboutMe.css);
+
+/* Portfolio */
+
+@import url(./components/Portfolio/Portfolio.css);

@@ -1,0 +1,139 @@
+.about-me {
+	display: grid;
+	grid-template-columns: minmax(auto, 600px) min-content;
+	grid-template-areas:
+		"heading heading"
+		"info-block photo";
+	justify-content: space-between;
+	max-width: 1280px;
+	margin: 0 auto;
+	padding: 100px 70px;
+	column-gap: 50px;
+}
+
+.about-me__section-heading {
+	margin: 0 0 66px 0;
+	grid-area: heading;
+}
+
+.about-me__info-block {
+	grid-area: info-block;
+}
+
+.about-me__name {
+	font-size: 50px;
+	font-weight: normal;
+	line-height: 1.16;
+	letter-spacing: -2px;
+	margin: 0 0 18px 0;
+}
+
+.about-me__occupation {
+	font-size: 18px;
+	font-weight: 500;
+	line-height: 1.11;
+	margin: 0 0 26px 0;
+}
+
+.about-me__biography {
+	font-size: 14px;
+	line-height: 1.57;
+	margin: 0;
+	margin: 0 0 100px 0;
+}
+
+.about-me__link {
+	text-decoration: none;
+	color: #fff;
+	font-size: 14px;
+	font-weight: 500;
+	cursor: pointer;
+	transition: opacity .2s linear;
+	margin: auto 0 0 0;
+}
+
+.about-me__link:hover {
+	opacity: .6;
+}
+
+.about-me__photo {
+	width: 270px;
+	height: 327px;
+	border-radius: 10px;
+	grid-area: photo;
+}
+
+@media (max-width: 786px) {
+	.about-me {
+		padding: 90px 50px;
+	}
+
+	.about-me__section-heading {
+		margin-bottom: 60px;
+	}
+
+	.about-me__name {
+		margin-bottom: 16px;
+		font-size: 40px;
+		line-height: 1;
+		letter-spacing: -1.6px;
+	}
+
+	.about-me__occupation {
+		font-size: 12px;
+		line-height: 1.5;
+		margin-bottom: 20px;
+	}
+
+	.about-me__biography {
+		margin-bottom: 87px;
+		font-size: 12px;
+	}
+
+	.about-me__photo {
+		width: 255px;
+		height: 307px;
+	}
+}
+
+@media (max-width: 650px) {
+	.about-me {
+		grid-template-columns: auto;
+		grid-template-areas:
+			"heading"
+			"photo"
+			"info-block";
+	}
+
+	.about-me__info-block {
+		order: 2;
+	}
+
+	.about-me__photo {
+		order: 1;
+		margin-bottom: 40px;
+		width: 292px;
+		height: 352px;
+		justify-self: center;
+	}
+}
+
+@media (max-width: 570px) {
+	.about-me {
+		padding: 70px 14px;
+	}
+}
+
+
+@media (max-width: 398px) {
+	.about-me__name {
+		margin-bottom: 20px;
+		font-size: 30px;
+		letter-spacing: -1.2px;
+	}
+
+	.about-me__biography {
+		margin-bottom: 40px;
+		font-size: 11px;
+	}
+}
