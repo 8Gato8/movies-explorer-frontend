@@ -15,7 +15,6 @@
 .about-project__section-heading {
 	margin: 0 0 70px 0;
 	grid-area: heading;
-	font-weight: normal;
 }
 
 .about-project__info-block {
@@ -76,7 +75,7 @@
 	order: 3;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 786px) {
 	.about-project {
 		padding: 90px 50px;
 		column-gap: 30px;
@@ -116,7 +115,6 @@
 
 @media (max-width: 398px) {
 	.about-project__section-heading {
-		font-size: 18px;
 		margin-bottom: 60px;
 	}
 

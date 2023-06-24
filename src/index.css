@@ -40,3 +40,7 @@ body {
 /* AboutProject */
 
 @import url(./components/AboutProject/AboutProject.css);
+
+/* Techs */
+
+@import url(./components/Techs/Techs.css);

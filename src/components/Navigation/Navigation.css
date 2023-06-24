@@ -33,7 +33,7 @@
 	position: relative;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 786px) {
 	.nav__list_type_hidden {
 		display: none;
 	}
@@ -101,7 +101,7 @@
 	line-height: 1.33;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 786px) {
 
 	.nav__link_type_signin,
 	.nav__link_type_signup {
@@ -199,7 +199,7 @@
 	background: url('../../images/nav-menu-bar.svg') 0 0/auto auto no-repeat, url('../../images/nav-menu-bar.svg') center/auto auto no-repeat, url('../../images/nav-menu-bar.svg') 0 100%/auto auto no-repeat;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 786px) {
 	.nav__burger-button {
 		display: block;
 	}

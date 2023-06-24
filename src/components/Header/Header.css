@@ -13,7 +13,7 @@
 	min-height: 74px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 786px) {
 	.header__container {
 		padding: 0 30px
 	}
