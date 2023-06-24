@@ -45,6 +45,10 @@ body {
 
 @import url(./components/Techs/Techs.css);
 
+/* StudentInfo */
+
+@import url(./components/StudentInfo/StudentInfo.css);
+
 /* AboutMe */
 
 @import url(./components/AboutMe/AboutMe.css);

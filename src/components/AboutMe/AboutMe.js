@@ -1,4 +1,5 @@
 import React from 'react'
+
 import authorPhotoSrc from '../../images/photo.jpg';
 
 function AboutMe() {
@@ -21,4 +22,4 @@ function AboutMe() {
 	)
 }
 
-export default AboutMe
+export default AboutMe;
