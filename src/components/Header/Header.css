@@ -1,3 +1,7 @@
+.header_type_hidden {
+	display: none;
+}
+
 .header_theme_landing {
 	background-color: #073042;
 }

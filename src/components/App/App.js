@@ -4,22 +4,41 @@ import './App.css';
 
 import Header from '../Header/Header';
 import Main from '../Main/Main';
+import Movies from '../Movies/Movies';
+
+import Footer from '../Footer/Footer';
+
+import Register from '../Register/Register';
+import Login from '../Login/Login';
+
 import PageNotFound from '../PageNotFound/PageNotFound';
 
-import { IsLoggedInContext } from '../../contexts/isLoggedInContext';
+import { IsLoggedInContext } from '../../contexts/IsLoggedInContext';
+import { CurrentPathContext } from '../../contexts/CurrentPathContext';
 
 function App() {
 
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const [isLoggedIn, setIsLoggedIn] = React.useState(true);
+  const [currentPath, setCurrentPath] = React.useState('');
 
   return (
     <div className='app'>
-      <IsLoggedInContext.Provider value={isLoggedIn}>
-        <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="*" element={<PageNotFound />} />
-        </Routes>
-      </IsLoggedInContext.Provider >
+      <CurrentPathContext.Provider value={currentPath}>
+        <IsLoggedInContext.Provider value={isLoggedIn}>
+          <Header />
+
+          <Routes>
+            <Route path="/" element={<Main setCurrentPath={setCurrentPath} />} />
+            <Route path="signup" element={<Register setCurrentPath={setCurrentPath} />} />
+            <Route path="signin" element={<Login setCurrentPath={setCurrentPath} />} />
+            <Route path="/movies" element={<Movies setCurrentPath={setCurrentPath} />} />
+            <Route path="/saved-movies" element={<Movies setCurrentPath={setCurrentPath} />} />
+            <Route path="*" element={<PageNotFound setCurrentPath={setCurrentPath} />} />
+          </Routes>
+
+          <Footer />
+        </IsLoggedInContext.Provider >
+      </CurrentPathContext.Provider>
     </div>
   );
 }

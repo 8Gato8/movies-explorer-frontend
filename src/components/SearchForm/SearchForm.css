@@ -1,0 +1,112 @@
+.search {
+	max-width: 1280px;
+	width: 100%;
+	margin: 0 auto;
+	padding: 80px 70px;
+}
+
+.search__form {
+	display: grid;
+	grid-template-columns: 1fr 44px;
+	grid-template-rows: 50px 1fr;
+	grid-template-areas:
+		"search-bar button"
+		"checkbox checkbox";
+	column-gap: 10px;
+	row-gap: 30px;
+	border-bottom: 1px solid #424242;
+	min-height: 137px;
+}
+
+.search__form-search-input {
+	grid-area: search-bar;
+	padding: 0 20px;
+	color: #fff;
+	font-size: 14px;
+	line-height: 1.29;
+	border: 0;
+	border-radius: 8px;
+	background: #2F2F2F;
+}
+
+.search__form-search-input::placeholder {
+	color: #8B8B8B;
+}
+
+.search__form-checkbox-label {
+	grid-area: checkbox;
+	justify-self: center;
+	display: flex;
+	column-gap: 12px;
+	height: 20px;
+	align-items: center;
+}
+
+.search__form-checkbox {
+	position: absolute;
+	width: 0;
+	height: 0;
+	overflow: hidden;
+	clip-path: inset(0 0 0 0);
+}
+
+.search__form-visible-checkbox {
+	position: relative;
+	width: 36px;
+	height: 20px;
+	border-radius: 10px;
+	background-color: #2F2F2F;
+	transition: background-color 0.2s linear;
+}
+
+.search__form-visible-checkbox::after {
+	content: '';
+	position: absolute;
+	width: 8px;
+	height: 8px;
+	top: 31%;
+	left: 7px;
+	background-color: #fff;
+	border-radius: 50%;
+	transition: transform 0.2s linear;
+}
+
+.search__form-checkbox:checked+.search__form-visible-checkbox {
+	background-color: #3DDC84;
+}
+
+.search__form-checkbox:checked+.search__form-visible-checkbox::after {
+	transform: translate(15px, 0);
+}
+
+.search__form-checkbox-lebel-text {
+	font-size: 12px;
+	line-height: 1.5;
+	align-self: center;
+}
+
+.search__form-submit-button {
+	grid-area: button;
+	padding: 0;
+	border: 0;
+	height: 44px;
+	align-self: center;
+	border-radius: 8px;
+	background: #4285f4 url('../../images/search-icon.svg') 50% / auto no-repeat;
+}
+
+@media (max-width: 786px) {
+	.search {
+		padding: 80px 30px;
+	}
+}
+
+@media (max-width: 398px) {
+	.search {
+		padding: 80px 14px 50px;
+	}
+
+	.search__form-checkbox-label {
+		font-size: 11px;
+	}
+}

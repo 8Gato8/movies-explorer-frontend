@@ -1,5 +1,5 @@
 import React from "react"
-import { IsLoggedInContext } from "../../contexts/isLoggedInContext"
+import { IsLoggedInContext } from "../../contexts/IsLoggedInContext"
 import { Link } from "react-router-dom";
 import SidebarMenu from "../SidebarMenu/SidebarMenu";
 import Menu from "../Menu/Menu";

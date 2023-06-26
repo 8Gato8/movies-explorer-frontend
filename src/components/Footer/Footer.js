@@ -1,8 +1,20 @@
-import React from 'react'
+import React from 'react';
+import { CurrentPathContext } from "../../contexts/CurrentPathContext";
 
 function Footer() {
+
+	const currentPath = React.useContext(CurrentPathContext);
+
 	return (
-		<footer className="footer">
+		<footer className={
+			`footer 
+			${currentPath === '/signup'
+				|| currentPath === '/signin'
+				|| currentPath === '*'
+				? 'footer_type_hidden'
+				: ''
+			}`
+		}>
 			<div className="footer__container">
 
 				<p className="footer__caption">Учебный проект Яндекс.Практикум х&nbsp;BeatFilm.</p>
@@ -23,4 +35,4 @@ function Footer() {
 	)
 }
 
-export default Footer
+export default Footer;

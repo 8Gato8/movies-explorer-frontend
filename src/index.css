@@ -21,6 +21,10 @@ body {
 
 @import url(./components/generalStyles/section-heading.css);
 
+/* PageNotFound */
+
+@import url(./components/PageNotFound/PageNotFound.css);
+
 /* App */
 
 @import url(./components/App/App.css);
@@ -56,6 +60,10 @@ body {
 /* Portfolio */
 
 @import url(./components/Portfolio/Portfolio.css);
+
+/* SearchForm */
+
+@import url(./components/SearchForm/SearchForm.css);
 
 /* Footer */
 

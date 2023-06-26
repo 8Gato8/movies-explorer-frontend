@@ -1,9 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import './PageNotFound.css';
+function PageNotFound({ setCurrentPath }) {
 
-function PageNotFound() {
+	React.useEffect(() => {
+		setCurrentPath('*');
+	}, [setCurrentPath])
+
 	return (
 		<div className="not-found">
 			<h3 className="not-found__title">
