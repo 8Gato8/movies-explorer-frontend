@@ -84,7 +84,7 @@
 }
 
 .nav__link:hover {
-	opacity: 0.6;
+	opacity: .6;
 }
 
 .nav__link_type_signin {

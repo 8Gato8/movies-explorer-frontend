@@ -1,7 +1,10 @@
 import React from 'react';
 import SearchForm from '../SearchForm/SearchForm';
+import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
-function Movies({ setCurrentPath }) {
+
+
+function Movies({ setCurrentPath, movies }) {
 
 	React.useEffect(() => {
 		setCurrentPath('/movies');
@@ -10,6 +13,7 @@ function Movies({ setCurrentPath }) {
 	return (
 		<div className="movies">
 			<SearchForm />
+			<MoviesCardList movies={movies} />
 		</div >
 	)
 }

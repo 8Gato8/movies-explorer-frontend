@@ -56,7 +56,9 @@
 	height: 20px;
 	border-radius: 10px;
 	background-color: #2F2F2F;
+	cursor: pointer;
 	transition: background-color 0.2s linear;
+	transition: opacity 0.3s linear;
 }
 
 .search__form-visible-checkbox::after {
@@ -68,7 +70,11 @@
 	left: 7px;
 	background-color: #fff;
 	border-radius: 50%;
-	transition: transform 0.2s linear;
+	transition: transform .2s linear;
+}
+
+.search__form-visible-checkbox:hover {
+	opacity: 0.8;
 }
 
 .search__form-checkbox:checked+.search__form-visible-checkbox {
@@ -92,7 +98,13 @@
 	height: 44px;
 	align-self: center;
 	border-radius: 8px;
+	cursor: pointer;
+	transition: opacity 0.2s linear;
 	background: #4285f4 url('../../images/search-icon.svg') 50% / auto no-repeat;
+}
+
+.search__form-submit-button:hover {
+	opacity: 0.7;
 }
 
 @media (max-width: 786px) {

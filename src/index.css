@@ -65,6 +65,14 @@ body {
 
 @import url(./components/SearchForm/SearchForm.css);
 
+/* MoviesCardList */
+
+@import url(./components/MoviesCardList/MoviesCardList.css);
+
+/* MoviesCard */
+
+@import url(./components/MoviesCard/MoviesCard.css);
+
 /* Footer */
 
 @import url(./components/Footer/Footer.css);
