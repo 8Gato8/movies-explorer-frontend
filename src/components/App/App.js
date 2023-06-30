@@ -5,7 +5,6 @@ import './App.css';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
-import SavedMovies from '../SavedMovies/SavedMovies';
 
 import Footer from '../Footer/Footer';
 
@@ -18,6 +17,7 @@ import { IsLoggedInContext } from '../../contexts/IsLoggedInContext';
 import { CurrentPathContext } from '../../contexts/CurrentPathContext';
 
 import { movies } from '../../utils/moviesDataTemp/movies';
+import { savedMovies } from '../../utils/moviesDataTemp/savedMovies';
 
 function App() {
 
@@ -34,8 +34,8 @@ function App() {
             <Route path="/" element={<Main setCurrentPath={setCurrentPath} />} />
             <Route path="signup" element={<Register setCurrentPath={setCurrentPath} />} />
             <Route path="signin" element={<Login setCurrentPath={setCurrentPath} />} />
-            <Route path="/movies" element={<Movies setCurrentPath={setCurrentPath} movies={movies} />} />
-            <Route path="/saved-movies" element={<SavedMovies setCurrentPath={setCurrentPath} />} />
+            <Route path="/movies" element={<Movies setCurrentPath={setCurrentPath} currentPath={'/movies'} movies={movies} />} />
+            <Route path="/saved-movies" element={<Movies setCurrentPath={setCurrentPath} currentPath={'/saved-movies'} movies={savedMovies} />} />
             <Route path="*" element={<PageNotFound setCurrentPath={setCurrentPath} />} />
           </Routes>
 

@@ -2,13 +2,11 @@ import React from 'react';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
-
-
-function Movies({ setCurrentPath, movies }) {
+function Movies({ setCurrentPath, currentPath, movies }) {
 
 	React.useEffect(() => {
-		setCurrentPath('/movies');
-	}, [setCurrentPath])
+		setCurrentPath(currentPath);
+	}, [setCurrentPath, currentPath])
 
 	return (
 		<div className="movies">
