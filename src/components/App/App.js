@@ -31,12 +31,12 @@ function App() {
           <Header />
 
           <Routes>
-            <Route path="/" element={<Main setCurrentPath={setCurrentPath} />} />
-            <Route path="signup" element={<Register setCurrentPath={setCurrentPath} />} />
-            <Route path="signin" element={<Login setCurrentPath={setCurrentPath} />} />
+            <Route path="/" element={<Main setCurrentPath={setCurrentPath} currentPath={'/'} />} />
+            <Route path="signup" element={<Register setCurrentPath={setCurrentPath} currentPath={'/signup'} />} />
+            <Route path="signin" element={<Login setCurrentPath={setCurrentPath} currentPath={'/signin'} />} />
             <Route path="/movies" element={<Movies setCurrentPath={setCurrentPath} currentPath={'/movies'} movies={movies} />} />
             <Route path="/saved-movies" element={<Movies setCurrentPath={setCurrentPath} currentPath={'/saved-movies'} movies={savedMovies} />} />
-            <Route path="*" element={<PageNotFound setCurrentPath={setCurrentPath} />} />
+            <Route path="*" element={<PageNotFound setCurrentPath={setCurrentPath} currentPath={'*'} />} />
           </Routes>
 
           <Footer />

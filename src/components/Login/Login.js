@@ -1,10 +1,10 @@
 import React from 'react'
 
-function Login({ setCurrentPath }) {
+function Login({ setCurrentPath, currentPath }) {
 
 	React.useEffect(() => {
-		setCurrentPath('/signin');
-	}, [setCurrentPath])
+		setCurrentPath(currentPath);
+	}, [setCurrentPath, currentPath])
 
 	return (
 		<div className="login"></div>

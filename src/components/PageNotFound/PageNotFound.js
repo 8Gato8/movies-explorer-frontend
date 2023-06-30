@@ -1,22 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function PageNotFound({ setCurrentPath }) {
+function PageNotFound({ setCurrentPath, currentPath }) {
 
 	React.useEffect(() => {
-		setCurrentPath('*');
-	}, [setCurrentPath])
+		setCurrentPath(currentPath);
+	}, [setCurrentPath, currentPath])
 
 	return (
 		<div className="not-found">
-			<h3 className="not-found__title">
-				<span>404</span>
-				Страница не найдена
-			</h3>
-			<p className="not-found__text">
-				Ой, здесь ничего нет
-			</p>
-			<Link className="button button_type_to-main" to="/">Назад</Link>
+			<div className="not-found__container">
+				<p className="not-found__code">404</p>
+				<h3 className="not-found__title">
+					Страница не найдена
+				</h3>
+				<Link className="not-found__button" to="/">Назад</Link>
+			</div>
 		</div>
 	)
 }

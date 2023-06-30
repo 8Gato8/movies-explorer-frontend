@@ -1,10 +1,10 @@
 import React from 'react'
 
-function Register({ setCurrentPath }) {
+function Register({ setCurrentPath, currentPath }) {
 
 	React.useEffect(() => {
-		setCurrentPath('/signup');
-	}, [setCurrentPath])
+		setCurrentPath(currentPath);
+	}, [setCurrentPath, currentPath])
 
 	return (
 		<div className="register"></div>
