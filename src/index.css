@@ -20,6 +20,7 @@ body {
 /* generalStyles */
 
 @import url(./components/generalStyles/section-heading.css);
+@import url(./components/generalStyles/heading.css);
 
 /* PageNotFound */
 
@@ -72,6 +73,10 @@ body {
 /* MoviesCard */
 
 @import url(./components/MoviesCard/MoviesCard.css);
+
+/* Profile */
+
+@import url(./components/Profile/Profile.css);
 
 /* Footer */
 

@@ -7,7 +7,7 @@ function Register({ setCurrentPath, currentPath }) {
 	}, [setCurrentPath, currentPath])
 
 	return (
-		<div className="register"></div>
+		<main className="register"></main>
 	)
 }
 

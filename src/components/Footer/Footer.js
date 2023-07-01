@@ -10,6 +10,7 @@ function Footer() {
 			`footer 
 			${currentPath === '/signup'
 				|| currentPath === '/signin'
+				|| currentPath === '/profile'
 				|| currentPath === '*'
 				? 'footer_type_hidden'
 				: ''

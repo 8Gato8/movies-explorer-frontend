@@ -10,6 +10,7 @@ import Footer from '../Footer/Footer';
 
 import Register from '../Register/Register';
 import Login from '../Login/Login';
+import Profile from '../Profile/Profile';
 
 import PageNotFound from '../PageNotFound/PageNotFound';
 
@@ -32,10 +33,11 @@ function App() {
 
           <Routes>
             <Route path="/" element={<Main setCurrentPath={setCurrentPath} currentPath={'/'} />} />
-            <Route path="signup" element={<Register setCurrentPath={setCurrentPath} currentPath={'/signup'} />} />
-            <Route path="signin" element={<Login setCurrentPath={setCurrentPath} currentPath={'/signin'} />} />
+            <Route path="/signup" element={<Register setCurrentPath={setCurrentPath} currentPath={'/signup'} />} />
+            <Route path="/signin" element={<Login setCurrentPath={setCurrentPath} currentPath={'/signin'} />} />
             <Route path="/movies" element={<Movies setCurrentPath={setCurrentPath} currentPath={'/movies'} movies={movies} />} />
             <Route path="/saved-movies" element={<Movies setCurrentPath={setCurrentPath} currentPath={'/saved-movies'} movies={savedMovies} />} />
+            <Route path="/profile" element={<Profile setCurrentPath={setCurrentPath} currentPath={'/profile'} />} />
             <Route path="*" element={<PageNotFound setCurrentPath={setCurrentPath} currentPath={'*'} />} />
           </Routes>
 

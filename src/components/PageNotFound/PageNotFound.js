@@ -14,7 +14,7 @@ function PageNotFound({ setCurrentPath, currentPath }) {
 				<h3 className="not-found__title">
 					Страница не найдена
 				</h3>
-				<Link className="not-found__button" to="/">Назад</Link>
+				<Link className="not-found__link" to="/">Назад</Link>
 			</div>
 		</div>
 	)

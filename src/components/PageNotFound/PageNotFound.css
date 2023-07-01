@@ -27,11 +27,10 @@
 
 .not-found__title {
 	font-size: 16px;
-	/* margin: 0 0 184px 0; */
 	margin: 0;
 }
 
-.not-found__button {
+.not-found__link {
 	position: absolute;
 	top: 377px;
 	color: #4285F4;
@@ -43,20 +42,11 @@
 	cursor: pointer;
 }
 
-.not-found__button:hover {
+.not-found__link:hover {
 	opacity: .6;
 }
 
-/* @media (max-width: 786px) {
-	.not-found {
-		grid-template-rows: 2f 1fr 222px;
-	}
-} */
-
 @media (max-width: 398px) {
-	/* .not-found {
-		grid-template-rows: 329px 1fr 30px;
-	} */
 
 	.not-found__code {
 		font-size: 80px;
@@ -65,10 +55,9 @@
 
 	.not-found__title {
 		font-size: 12px;
-		/* margin-bottom: 284px; */
 	}
 
-	.not-found__button {
+	.not-found__link {
 		font-size: 12px;
 		top: 406px;
 	}

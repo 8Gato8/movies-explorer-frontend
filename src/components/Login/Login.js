@@ -7,7 +7,7 @@ function Login({ setCurrentPath, currentPath }) {
 	}, [setCurrentPath, currentPath])
 
 	return (
-		<div className="login"></div>
+		<main className="login"></main>
 	)
 }
 
