@@ -21,7 +21,8 @@ body {
 
 @import url(./components/generalStyles/section-heading.css);
 @import url(./components/generalStyles/heading.css);
-
+@import url(./components/generalStyles/logo.css);
+@import url(./components/generalStyles/redirection-link.css);
 /* PageNotFound */
 
 @import url(./components/PageNotFound/PageNotFound.css);
@@ -77,6 +78,18 @@ body {
 /* Profile */
 
 @import url(./components/Profile/Profile.css);
+
+/* Register */
+
+@import url(./components/Register/Register.css);
+
+/* Login */
+
+@import url(./components/Login/Login.css);
+
+/* Form */
+
+@import url(./components/Form/Form.css);
 
 /* Footer */
 

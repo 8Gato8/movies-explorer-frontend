@@ -1,11 +1,17 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function PageNotFound({ setCurrentPath, currentPath }) {
 
 	React.useEffect(() => {
 		setCurrentPath(currentPath);
 	}, [setCurrentPath, currentPath])
+
+	const navigate = useNavigate();
+
+	const goBack = () => {
+		navigate(-1)
+	}
 
 	return (
 		<div className="not-found">
@@ -14,7 +20,7 @@ function PageNotFound({ setCurrentPath, currentPath }) {
 				<h3 className="not-found__title">
 					Страница не найдена
 				</h3>
-				<Link className="not-found__link" to="/">Назад</Link>
+				<button className="not-found__redirection-link redirection-link" onClick={goBack}>Назад</button>
 			</div>
 		</div>
 	)

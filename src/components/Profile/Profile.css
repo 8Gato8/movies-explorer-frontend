@@ -96,8 +96,7 @@
 	}
 
 	.profile {
-		padding-top: 70px;
-		padding-bottom: 40px;
+		padding: 70px 0 40px 0;
 		height: 100%;
 		grid-template-rows: repeat(2, min-content) 1fr repeat(2, min-content);
 		grid-template-areas:

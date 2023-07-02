@@ -1,0 +1,16 @@
+.logo {
+	height: 38px;
+	width: 38px;
+}
+
+.logo_style_form {
+	margin-bottom: 40px;
+	justify-self: start;
+}
+
+@media (max-width: 398px) {
+	.logo_style_form {
+		margin-bottom: 50px;
+		justify-self: center;
+	}
+}
