@@ -1,0 +1,26 @@
+.nav__burger-button {
+	display: none;
+	position: absolute;
+	border: none;
+	top: 26px;
+	right: 38px;
+	width: 22px;
+	height: 22px;
+	cursor: pointer;
+	transition: opacity .2s linear;
+	padding: 0;
+	background: url('../../images/nav-menu-bar.svg') 0 0/auto auto no-repeat, url('../../images/nav-menu-bar.svg') center/auto auto no-repeat, url('../../images/nav-menu-bar.svg') 0 100%/auto auto no-repeat;
+}
+
+@media (max-width: 786px) {
+	.nav__burger-button {
+		display: block;
+	}
+}
+
+@media (max-width: 398px) {
+	.nav__burger-button {
+		top: 27;
+		right: 23px;
+	}
+}

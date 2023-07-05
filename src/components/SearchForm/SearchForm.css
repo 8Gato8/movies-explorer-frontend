@@ -27,6 +27,7 @@
 	border: 0;
 	border-radius: 8px;
 	background: #2F2F2F;
+	outline: none;
 }
 
 .search__form-search-input::placeholder {

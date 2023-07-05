@@ -1,6 +1,7 @@
 import React from 'react';
 import logoSrc from '../../images/logo.svg';
 import { NavLink } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 function Form({
 	headingText,
@@ -19,7 +20,7 @@ function Form({
 	return (
 		<div className="form-wrapper">
 
-			<img className="logo form-wrapper__logo logo_style_form" src={logoSrc} alt="Лого проекта" />
+			<Link className="form-wrapper__logo-link" to="/"><img className="logo form-wrapper__logo logo_style_form" src={logoSrc} alt="Лого проекта" /></Link>
 
 			<h1 className="form-heading heading">{headingText}</h1>
 

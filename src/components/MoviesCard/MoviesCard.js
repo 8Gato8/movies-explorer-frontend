@@ -5,6 +5,13 @@ function MoviesCard({ movie }) {
 
 	const currentPath = React.useContext(CurrentPathContext);
 
+	const movieCardButtonClassName = (
+		`movie-card__button ${true
+			? 'movie-card__button_type_save'
+			: 'movie-card__button_type_already-saved'
+		}`
+	);
+
 	return (
 		<li className="movies-cards__card-list-item movie-card">
 
@@ -16,10 +23,7 @@ function MoviesCard({ movie }) {
 					alt={movie.name}
 				/>
 
-				{currentPath === '/movies' && <button className={`movie-card__button ${true
-					? 'movie-card__button_type_save'
-					: 'movie-card__button_type_already-saved'
-					}`}>
+				{currentPath === '/movies' && <button className={movieCardButtonClassName}>
 				</button>}
 
 				{currentPath === '/saved-movies' && <button className='movie-card__button movie-card__button_type_delete'>

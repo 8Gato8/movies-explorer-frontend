@@ -26,8 +26,8 @@ function Footer() {
 
 					<ul className="footer__nav-list">
 
-						<li className="footer__nav-item"><a href="https://practicum.yandex.ru/" className="footer__nav-link">Яндекс.Практикум</a></li>
-						<li className="footer__nav-item"><a href="https://github.com/8Gato8" className="footer__nav-link">Github</a></li>
+						<li className="footer__nav-item"><a href="https://practicum.yandex.ru/" className="footer__nav-link" target="_blank" rel="noreferrer">Яндекс.Практикум</a></li>
+						<li className="footer__nav-item"><a href="https://github.com/8Gato8" className="footer__nav-link" target="_blank" rel="noreferrer">Github</a></li>
 
 					</ul>
 				</nav>

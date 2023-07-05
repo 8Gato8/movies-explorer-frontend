@@ -8,6 +8,10 @@
   box-sizing: border-box;
 }
 
+html {
+  overflow-y: scroll;
+}
+
 body {
   position: relative;
   margin: 0;
@@ -23,6 +27,11 @@ body {
 @import url(./components/generalStyles/heading.css);
 @import url(./components/generalStyles/logo.css);
 @import url(./components/generalStyles/redirection-link.css);
+
+/* Preloader */
+
+@import url(./components/Preloader/Preloader.css);
+
 /* PageNotFound */
 
 @import url(./components/PageNotFound/PageNotFound.css);
@@ -38,6 +47,14 @@ body {
 /* Navigation */
 
 @import url(./components/Navigation/Navigation.css);
+
+/* Menu */
+
+@import url(./components/Menu/Menu.css);
+
+/* Sidebar */
+
+@import url(./components/SidebarMenu/SidebarMenu.css);
 
 /* Promo */
 

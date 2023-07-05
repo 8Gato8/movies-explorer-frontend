@@ -1,16 +1,10 @@
 .logo {
 	height: 38px;
 	width: 38px;
+	cursor: pointer;
+	transition: opacity .2s linear;
 }
 
-.logo_style_form {
-	margin-bottom: 40px;
-	justify-self: start;
-}
-
-@media (max-width: 398px) {
-	.logo_style_form {
-		margin-bottom: 50px;
-		justify-self: center;
-	}
+.logo:hover {
+	opacity: .6;
 }

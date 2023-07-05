@@ -15,7 +15,7 @@ function MoviesCardList({ movies }) {
 				))}
 			</ul>
 
-			{movies.length <= 12 && <button type="button" className="movies-cards__more-button">Ещё</button>}
+			{movies.length >= 12 && <button type="button" className="movies-cards__more-button">Ещё</button>}
 		</article>
 	)
 }

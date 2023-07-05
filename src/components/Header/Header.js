@@ -1,6 +1,7 @@
 import React from "react";
 import { IsLoggedInContext } from '../../contexts/IsLoggedInContext';
 import { CurrentPathContext } from "../../contexts/CurrentPathContext";
+import { Link } from 'react-router-dom';
 
 import Navigation from '../Navigation/Navigation';
 
@@ -22,7 +23,7 @@ function Header() {
 		}>
 
 			<div className={`${isLoggedIn ? 'header__container_type_logged_in' : 'header__container_type_not_logged_in'} header__container`}>
-				<img className="header__logo logo" src={logoSrc} alt="Лого проекта" />
+				<Link to="/"><img className="header__logo logo" src={logoSrc} alt="Лого проекта" /></Link>
 				<Navigation />
 			</div>
 

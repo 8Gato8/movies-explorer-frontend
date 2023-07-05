@@ -5,10 +5,27 @@ import SidebarMenu from "../SidebarMenu/SidebarMenu";
 import Menu from "../Menu/Menu";
 
 function Navigation() {
-	const [sidebar, setSidebar] = React.useState(false);
+	const [isSidebarOpen, setIsSidebarOpensetSidebar] = React.useState(false);
 	const isLoggedIn = React.useContext(IsLoggedInContext);
 
-	const toggleSidebar = () => setSidebar(!sidebar);
+	const toggleSidebar = () => setIsSidebarOpensetSidebar(!isSidebarOpen);
+
+	const useMediaQuery = (value) => {
+
+		const mediaQuery = React.useMemo(() => window.matchMedia(value), [value]);
+		const [match, setMatch] = React.useState(mediaQuery.matches);
+
+		React.useEffect(() => {
+			const onChange = () => setMatch(mediaQuery.matches);
+			mediaQuery.addEventListener("change", onChange);
+
+			return () => mediaQuery.removeEventListener("change", onChange);
+		}, [mediaQuery]);
+
+		return match;
+	}
+
+	const isSidebarTooWide = useMediaQuery("(min-width: 768px)");
 
 	return (
 		<nav className="nav">
@@ -22,11 +39,11 @@ function Navigation() {
 
 					</ul>
 					:
-					(!sidebar)
+					(!isSidebarOpen)
 						?
 						<Menu toggleSidebar={toggleSidebar} />
 						:
-						<SidebarMenu toggleSidebar={toggleSidebar} />
+						!isSidebarTooWide ? <SidebarMenu toggleSidebar={toggleSidebar} /> : <Menu toggleSidebar={toggleSidebar} />
 			}
 
 		</nav >
