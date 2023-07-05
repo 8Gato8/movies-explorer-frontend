@@ -1,5 +1,5 @@
 import React from "react";
-import { IsLoggedInContext } from '../../contexts/IsLoggedInContext';
+import { IsLoggedInContext } from "../../contexts/IsLoggedInContext";
 import { CurrentPathContext } from "../../contexts/CurrentPathContext";
 import { Link } from 'react-router-dom';
 
