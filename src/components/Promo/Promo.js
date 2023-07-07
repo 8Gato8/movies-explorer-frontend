@@ -1,12 +1,14 @@
 import React from 'react'
 import logoLandingSrc from '../../images/landing-logo.svg';
 
+import './Promo.css';
+
 function Promo() {
 	return (
 		<div className="promo-wrapper">
 			<section className="promo">
 				<h1 className="promo__heading">
-					Учебный проект студента факультета <span className="promo__nowrap-line">Веб-разработки.</span>
+					Учебный проект <span className="promo__nowrap-first-line">студента факультета</span> <span className="promo__nowrap-second-line">Веб-разработки.</span>
 				</h1>
 
 				<p className="promo__hint">Листайте ниже, чтобы узнать больше про этот проект и&nbsp;его создателя.</p>

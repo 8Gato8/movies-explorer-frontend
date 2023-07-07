@@ -3,6 +3,8 @@ import Form from '../Form/Form';
 import { regex } from '../../utils/regexEmailValidation';
 import { useInput } from '../../utils/validation';
 
+import './Login.css';
+
 function Login({ setCurrentPath, currentPath }) {
 
 	React.useEffect(() => {

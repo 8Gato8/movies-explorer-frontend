@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import SidebarMenu from "../SidebarMenu/SidebarMenu";
 import Menu from "../Menu/Menu";
 
+import './Navigation.css';
+
 function Navigation() {
 	const [isSidebarOpen, setIsSidebarOpensetSidebar] = React.useState(false);
 	const isLoggedIn = React.useContext(IsLoggedInContext);

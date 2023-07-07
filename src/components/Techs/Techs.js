@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './Techs.css';
+
 function Techs() {
 	return (
 		<div className="techs-wrapper">
@@ -8,7 +10,7 @@ function Techs() {
 
 				<h3 className="techs__sub-heading">7 технологий</h3>
 
-				<p className="techs__info">На&nbsp;курсе веб-разработки мы&nbsp;освоили технологии, которые применили в&nbsp;дипломном проекте.</p>
+				<p className="techs__info">На&nbsp;курсе веб-разработки мы&nbsp;освоили технологии, которые применили в дипломном проекте.</p>
 
 				<ul className="techs__tech-list">
 					<li className="techs__tech">HTML</li>

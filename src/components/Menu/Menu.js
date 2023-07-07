@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import './Menu.css';
+
 function Menu({ toggleSidebar }) {
 
 	return (
@@ -13,13 +15,12 @@ function Menu({ toggleSidebar }) {
 
 				<li className="nav__item nav__item_type_saved-movies"><Link className="nav__link nav__link_type_saved-movies" to="/saved-movies">Сохранённые фильмы</Link></li>
 
-				<div className="nav__account-container">
+				<li className="nav__item nav__item_type_account">
 
-					<li className="nav__item"><Link className="nav__link nav__link_type_account" to="/profile">Аккаунт</Link>
-					</li>
+					<Link className="nav__link nav__link_type_account" to="/profile">Аккаунт</Link>
 
 					<div className="nav__account-icon"></div>
-				</div>
+				</li>
 			</ul>
 		</>
 	)

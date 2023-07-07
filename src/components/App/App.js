@@ -1,5 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
+
 import './App.css';
 
 import Header from '../Header/Header';
@@ -25,7 +26,7 @@ import { savedMovies } from '../../utils/moviesDataTemp/savedMovies';
 
 function App() {
 
-  const [isLoggedIn, setIsLoggedIn] = React.useState(true);
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [currentPath, setCurrentPath] = React.useState('');
 
   return (

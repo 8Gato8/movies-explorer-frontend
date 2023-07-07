@@ -1,11 +1,11 @@
 import React from "react";
 import { IsLoggedInContext } from "../../contexts/IsLoggedInContext";
 import { CurrentPathContext } from "../../contexts/CurrentPathContext";
-import { Link } from 'react-router-dom';
+import Logo from "../Logo/Logo";
+
+import './Header.css';
 
 import Navigation from '../Navigation/Navigation';
-
-import logoSrc from '../../images/logo.svg';
 
 function Header() {
 
@@ -23,7 +23,7 @@ function Header() {
 		}>
 
 			<div className={`${isLoggedIn ? 'header__container_type_logged_in' : 'header__container_type_not_logged_in'} header__container`}>
-				<Link to="/"><img className="header__logo logo" src={logoSrc} alt="Лого проекта" /></Link>
+				<Logo additionalLinkStyles={''} additionalImgStyles={'header__logo'} />
 				<Navigation />
 			</div>
 

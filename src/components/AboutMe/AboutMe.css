@@ -66,9 +66,9 @@
 	}
 
 	.about-me__name {
-		margin-bottom: 16px;
+		margin-bottom: 13px;
 		font-size: 40px;
-		line-height: 1;
+		line-height: normal;
 		letter-spacing: -1.6px;
 	}
 
@@ -81,11 +81,13 @@
 	.about-me__biography {
 		margin-bottom: 87px;
 		font-size: 12px;
+		line-height: 1.5;
 	}
 
 	.about-me__photo {
 		width: 255px;
 		height: 307px;
+		align-self: end;
 	}
 }
 
@@ -118,8 +120,16 @@
 		letter-spacing: -1.2px;
 	}
 
+	.about-me__occupation {
+		font-size: 11px;
+		line-height: 1.45;
+		margin-bottom: 20px;
+	}
+
+
 	.about-me__biography {
 		margin-bottom: 40px;
 		font-size: 11px;
+		line-height: 1.45;
 	}
 }

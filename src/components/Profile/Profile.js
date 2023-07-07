@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './Profile.css';
+
 function Profile({ setCurrentPath, currentPath }) {
 
 	React.useEffect(() => {

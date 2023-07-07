@@ -5,3 +5,10 @@
 	display: grid;
 	grid-template-rows: auto 1fr auto;
 }
+
+@media (max-width: 398px) {
+	.app {
+		grid-template-columns: minmax(320px, auto);
+		justify-content: center;
+	}
+}

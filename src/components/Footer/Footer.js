@@ -1,6 +1,8 @@
 import React from 'react';
 import { CurrentPathContext } from "../../contexts/CurrentPathContext";
 
+import './Footer.css';
+
 function Footer() {
 
 	const currentPath = React.useContext(CurrentPathContext);
@@ -18,9 +20,9 @@ function Footer() {
 		}>
 			<div className="footer__container">
 
-				<p className="footer__caption">Учебный проект Яндекс.Практикум х&nbsp;BeatFilm.</p>
+				<h3 className="footer__caption">Учебный проект Яндекс.Практикум х&nbsp;BeatFilm.</h3>
 
-				<p className="footer__copyright">&copy; {new Date().getFullYear()}</p>
+				<p className="footer__copyright">©{new Date().getFullYear()}</p>
 
 				<nav className="footer__nav">
 

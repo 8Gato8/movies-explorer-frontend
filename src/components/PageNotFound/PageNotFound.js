@@ -1,6 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import './PageNotFound.css';
+
 function PageNotFound({ setCurrentPath, currentPath }) {
 
 	React.useEffect(() => {
@@ -14,15 +16,15 @@ function PageNotFound({ setCurrentPath, currentPath }) {
 	}
 
 	return (
-		<div className="not-found">
-			<div className="not-found__container">
+		<section className="not-found">
+			<main className="not-found__container">
 				<p className="not-found__code">404</p>
-				<h3 className="not-found__title">
+				<h1 className="not-found__title">
 					Страница не найдена
-				</h3>
+				</h1>
 				<button className="not-found__redirection-link redirection-link" onClick={goBack}>Назад</button>
-			</div>
-		</div>
+			</main>
+		</section>
 	)
 }
 

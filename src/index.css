@@ -4,6 +4,7 @@
 @import url(./vendor/fonts/fonts.css);
 
 /* general styles */
+
 * {
   box-sizing: border-box;
 }
@@ -23,91 +24,6 @@ body {
 
 /* generalStyles */
 
-@import url(./components/generalStyles/section-heading.css);
-@import url(./components/generalStyles/heading.css);
-@import url(./components/generalStyles/logo.css);
-@import url(./components/generalStyles/redirection-link.css);
-
-/* Preloader */
-
-@import url(./components/Preloader/Preloader.css);
-
-/* PageNotFound */
-
-@import url(./components/PageNotFound/PageNotFound.css);
-
-/* App */
-
-@import url(./components/App/App.css);
-
-/* Header */
-
-@import url(./components/Header/Header.css);
-
-/* Navigation */
-
-@import url(./components/Navigation/Navigation.css);
-
-/* Menu */
-
-@import url(./components/Menu/Menu.css);
-
-/* Sidebar */
-
-@import url(./components/SidebarMenu/SidebarMenu.css);
-
-/* Promo */
-
-@import url(./components/Promo/Promo.css);
-
-/* AboutProject */
-
-@import url(./components/AboutProject/AboutProject.css);
-
-/* Techs */
-
-@import url(./components/Techs/Techs.css);
-
-/* StudentInfo */
-
-@import url(./components/StudentInfo/StudentInfo.css);
-
-/* AboutMe */
-
-@import url(./components/AboutMe/AboutMe.css);
-
-/* Portfolio */
-
-@import url(./components/Portfolio/Portfolio.css);
-
-/* SearchForm */
-
-@import url(./components/SearchForm/SearchForm.css);
-
-/* MoviesCardList */
-
-@import url(./components/MoviesCardList/MoviesCardList.css);
-
-/* MoviesCard */
-
-@import url(./components/MoviesCard/MoviesCard.css);
-
-/* Profile */
-
-@import url(./components/Profile/Profile.css);
-
-/* Register */
-
-@import url(./components/Register/Register.css);
-
-/* Login */
-
-@import url(./components/Login/Login.css);
-
-/* Form */
-
-@import url(./components/Form/Form.css);
-
-/* Footer */
-
-@import url(./components/Footer/Footer.css);
+@import url(./blocks/generalStyles/section-heading.css);
+@import url(./blocks/generalStyles/heading.css);
+@import url(./blocks/generalStyles/redirection-link.css);

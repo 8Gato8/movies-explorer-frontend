@@ -8,52 +8,7 @@
 	opacity: 0.3;
 }
 
-.nav__list_type_sidebar {
-	padding: 159px 0 99px 0;
-	box-sizing: border-box;
-	position: fixed;
-	grid-template-areas:
-		"main"
-		"movies"
-		"saved-movies"
-		"account";
-	grid-template-columns: auto;
-	grid-template-rows: repeat(3, max-content) 1fr;
-	width: 520px;
-	height: 100%;
-	top: 0;
-	right: 0;
-	grid-auto-rows: max-content;
-	grid-auto-flow: row;
-	justify-content: center;
-	justify-items: center;
-	column-gap: 0;
-	row-gap: 28px;
-	z-index: 2;
-}
-
-.nav__link_style_sidebar {
-	font-size: 18px;
-	line-height: 1.33;
-	position: relative;
-}
-
-.nav__link_style_sidebar:hover:after {
-	content: '';
-	position: absolute;
-	width: 100%;
-	height: 2px;
-	left: 0;
-	bottom: -4px;
-	background-color: #fff;
-}
-
 @media (max-width: 598px) {
-	.nav__list_type_sidebar {
-		padding: 144px 0 48px 0;
-		width: 100%;
-	}
-
 	.blur {
 		width: 0;
 	}

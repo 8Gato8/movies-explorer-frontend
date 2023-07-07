@@ -30,6 +30,7 @@
 	opacity: 0.5;
 	grid-area: hint;
 	max-width: 310px;
+	line-height: normal;
 }
 
 .promo__logo {
@@ -39,7 +40,8 @@
 .promo__nav-button {
 	align-self: center;
 	background-color: transparent;
-	padding: 10px 19px;
+	min-height: 36px;
+	padding: 0 19px;
 	border-radius: 3px;
 	border: 1px solid #fff;
 	grid-area: link;
@@ -60,8 +62,14 @@
 	line-height: 1.33;
 }
 
-.promo__nowrap-line {
+.promo__nowrap-second-line {
 	white-space: nowrap;
+}
+
+@media (max-width: 398px) {
+	.promo__nowrap-first-line {
+		white-space: nowrap;
+	}
 }
 
 @media (max-width: 1120px) {
@@ -101,10 +109,16 @@
 	.promo__heading {
 		font-size: 40px;
 		margin-bottom: 22px;
+		line-height: 1.25;
 	}
+
+	.promo__hint {
+		max-width: 260px;
+	}
+
 }
 
-@media (max-width: 398px) {
+@media (max-width: 428px) {
 	.promo {
 		padding: 70px 10px 30px;
 		grid-template-columns: min-content;
@@ -113,6 +127,8 @@
 	.promo__heading {
 		font-size: 30px;
 		margin-bottom: 24px;
+		letter-spacing: -1.2px;
+		line-height: 1.27;
 	}
 
 	.promo__hint {

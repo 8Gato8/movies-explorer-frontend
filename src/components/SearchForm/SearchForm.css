@@ -2,45 +2,86 @@
 	max-width: 1280px;
 	width: 100%;
 	margin: 0 auto;
-	padding: 80px 70px;
+	padding: 70px 70px 82px;
+	min-height: 137px;
+}
+
+.search__container {
+	border-bottom: 1px solid #424242;
+	min-height: 142px;
 }
 
 .search__form {
 	display: grid;
-	grid-template-columns: 1fr 44px;
-	grid-template-rows: 50px 1fr;
+	grid-template-columns: 1fr min-content;
 	grid-template-areas:
-		"search-bar button"
-		"checkbox checkbox";
+		"search-bar checkbox";
+	align-content: center;
+	border-radius: 9px;
+	background: #222;
+	box-shadow: 0px 3px 14px 0px rgba(0, 0, 0, 0.08);
+}
+
+.search__form-search-fieldset {
+	display: grid;
+	grid-template-columns: 1fr min-content;
+	align-items: center;
+	grid-area: search-bar;
+	border: 0;
+	margin: 0;
+	padding: 0 20px;
+	position: relative;
+}
+
+.search__form-search-fieldset::after {
+	content: '';
+	position: absolute;
+	top: 16px;
+	right: 0px;
+	width: 1px;
+	height: 40px;
+	background-color: #505050;
+}
+
+.search__form-search-input-container {
+	display: grid;
+	grid-template-columns: min-content 1fr;
 	column-gap: 10px;
-	row-gap: 30px;
-	border-bottom: 1px solid #424242;
-	min-height: 137px;
+	align-items: center;
 }
 
 .search__form-search-input {
-	grid-area: search-bar;
-	padding: 0 20px;
+	padding: 0;
 	color: #fff;
-	font-size: 14px;
-	line-height: 1.29;
-	border: 0;
-	border-radius: 8px;
-	background: #2F2F2F;
+	font-size: 18px;
+	line-height: 1.11;
 	outline: none;
+	border: 0;
+	min-height: 72px;
+	background-color: transparent;
 }
 
 .search__form-search-input::placeholder {
 	color: #8B8B8B;
 }
 
+.search__form-search-icon {
+	display: block;
+	width: 30px;
+	height: 30px;
+	border-radius: 50px;
+	background: url('../../images/search-icon_gray.svg') 50%/auto auto no-repeat;
+}
+
 .search__form-checkbox-label {
 	grid-area: checkbox;
-	justify-self: center;
-	display: flex;
-	column-gap: 12px;
-	height: 20px;
 	align-items: center;
+	display: flex;
+	column-gap: 14px;
+	height: 20px;
+	justify-self: center;
+	align-self: center;
+	padding: 0 30px;
 }
 
 .search__form-checkbox {
@@ -65,10 +106,10 @@
 .search__form-visible-checkbox::after {
 	content: '';
 	position: absolute;
-	width: 8px;
-	height: 8px;
-	top: 31%;
-	left: 7px;
+	width: 16px;
+	height: 16px;
+	top: 2px;
+	left: 2px;
 	background-color: #fff;
 	border-radius: 50%;
 	transition: transform .2s linear;
@@ -83,25 +124,22 @@
 }
 
 .search__form-checkbox:checked+.search__form-visible-checkbox::after {
-	transform: translate(15px, 0);
+	transform: translate(16px, 0);
 }
 
 .search__form-checkbox-lebel-text {
-	font-size: 12px;
-	line-height: 1.5;
-	align-self: center;
+	font-size: 13px;
+	line-height: 1.38;
 }
 
 .search__form-submit-button {
-	grid-area: button;
 	padding: 0;
 	border: 0;
-	height: 44px;
-	align-self: center;
-	border-radius: 8px;
+	height: 34px;
+	width: 84px;
 	cursor: pointer;
 	transition: opacity 0.2s linear;
-	background: #4285f4 url('../../images/search-icon.svg') 50% / auto no-repeat;
+	background: url('../../images/search-icon.svg') 50% / auto no-repeat;
 }
 
 .search__form-submit-button:hover {
@@ -110,16 +148,79 @@
 
 @media (max-width: 786px) {
 	.search {
-		padding: 80px 30px;
+		padding: 80px 30px 80px;
+	}
+
+	.search__container {
+		min-height: 182px;
+	}
+
+	.search__form {
+		grid-template-columns: 1fr minmax(207px, min-content);
+	}
+
+	.search__form-checkbox-label {
+		column-gap: 15px;
+		padding: 0 19px;
 	}
 }
 
-@media (max-width: 398px) {
+
+@media (max-width: 698px) {
+	.search__form {
+		grid-template-columns: 1fr;
+		grid-template-areas:
+			"search-bar"
+			"checkbox";
+		border-radius: unset;
+		background: #202020;
+		box-shadow: unset;
+		row-gap: 45px;
+	}
+
+	.search__form-search-input-container {
+		display: grid;
+		grid-template-columns: 1fr;
+	}
+
+	.search__form-search-fieldset {
+		border-radius: 9px;
+		background: #222;
+		box-shadow: 0px 3px 14px 0px rgba(0, 0, 0, 0.08);
+		grid-template-columns: 1fr min-content;
+		justify-content: space-between;
+	}
+
+	.search__form-search-icon {
+		display: none;
+	}
+
+	.search__form-search-fieldset::after {
+		display: none;
+	}
+
+	.search__form-checkbox-label {
+		margin-bottom: 45px;
+	}
+}
+
+@media (max-width: 440px) {
 	.search {
-		padding: 80px 14px 50px;
+		padding: 80px 10px 50px;
+	}
+
+	.search__form-search-input {
+		font-size: 13px;
+		line-height: 1.43;
 	}
 
 	.search__form-checkbox-label {
 		font-size: 11px;
+		column-gap: 13px;
+	}
+
+	.search__form-checkbox-lebel-text {
+		font-size: 11px;
+		line-height: 1.63;
 	}
 }

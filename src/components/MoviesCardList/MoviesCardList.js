@@ -1,10 +1,12 @@
 import React from 'react';
 import MoviesCard from '../MoviesCard/MoviesCard';
 
+import './MoviesCardList.css';
+
 function MoviesCardList({ movies }) {
 
 	return (
-		<article className="movies-cards">
+		<article className="app__movies-cards movies-cards">
 			<ul className="movies-cards__card-list">
 				{movies.map((movie, i) => (
 
@@ -15,7 +17,7 @@ function MoviesCardList({ movies }) {
 				))}
 			</ul>
 
-			{movies.length >= 12 && <button type="button" className="movies-cards__more-button">Ещё</button>}
+			{movies.length >= 5 && <button type="button" className="movies-cards__more-button">Ещё</button>}
 		</article>
 	)
 }

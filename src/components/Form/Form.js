@@ -1,7 +1,8 @@
 import React from 'react';
-import logoSrc from '../../images/logo.svg';
 import { NavLink } from "react-router-dom";
-import { Link } from 'react-router-dom';
+import Logo from "../Logo/Logo";
+
+import './Form.css';
 
 function Form({
 	headingText,
@@ -18,9 +19,9 @@ function Form({
 	}
 
 	return (
-		<div className="form-wrapper">
+		<section className="form-wrapper">
 
-			<Link className="form-wrapper__logo-link" to="/"><img className="logo form-wrapper__logo logo_style_form" src={logoSrc} alt="Лого проекта" /></Link>
+			<Logo additionalLinkStyles={'form-wrapper__logo-link'} additionalImgStyles={'form-wrapper__logo'} />
 
 			<h1 className="form-heading heading">{headingText}</h1>
 
@@ -48,7 +49,7 @@ function Form({
 				<NavLink className="form-redirection__link redirection-link" to={redirectionPath}>{linkText}</NavLink>
 			</div>
 
-		</div>
+		</section>
 	)
 }
 

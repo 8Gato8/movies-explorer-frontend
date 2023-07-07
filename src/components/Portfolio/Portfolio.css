@@ -43,12 +43,11 @@
 @media (max-width: 786px) {
 	.portfolio__heading {
 		color: #A0A0A0;
-		margin-bottom: 40px;
 	}
 
 	.portfolio__link {
 		font-size: 28px;
-		line-height: 1.8;
+		line-height: 1.79;
 		letter-spacing: -1.12px;
 	}
 
@@ -61,6 +60,7 @@
 	.portfolio__heading {
 		font-size: 14px;
 		line-height: 1.43;
+		margin-bottom: 40px;
 	}
 
 	.portfolio__link {
@@ -73,5 +73,6 @@
 	.portfolio__link::after {
 		width: 18px;
 		height: 28px;
+		background: url('../../images/portfolio-icon-mini.svg') 50%/auto no-repeat;
 	}
 }

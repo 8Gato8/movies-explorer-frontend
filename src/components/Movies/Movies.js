@@ -9,10 +9,10 @@ function Movies({ setCurrentPath, currentPath, movies }) {
 	}, [setCurrentPath, currentPath])
 
 	return (
-		<div className="movies">
+		<main className="movies">
 			<SearchForm />
 			<MoviesCardList movies={movies} />
-		</div >
+		</main >
 	)
 }
 

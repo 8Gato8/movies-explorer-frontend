@@ -1,4 +1,6 @@
-import React from 'react'
+import React from 'react';
+
+import './AboutMe.css';
 
 import authorPhotoSrc from '../../images/photo.jpg';
 
@@ -9,10 +11,11 @@ function AboutMe() {
 
 			<div className="about-me__info-block">
 
-				<h3 className="about-me__name">Сергей</h3>
-				<h3 className="about-me__occupation">Фронтенд-разработчик, 25 лет</h3>
+				<h3 className="about-me__name">Виталий</h3>
+				<h3 className="about-me__occupation">Фронтенд-разработчик, 30 лет</h3>
 
-				<p className="about-me__biography">Я&nbsp;родился и&nbsp;живу в&nbsp;Иркутске, закончил юридический факультет РГУП. Холост. Я&nbsp;люблю слушать музыку, играть в&nbsp;видео-игры, изучать историю, а&nbsp;еще с&nbsp;16&nbsp;лет увлекаюсь спортом. Неплохо знаю английский. Кодить начал около года назад. С&nbsp;2018 года работал в&nbsp;сфере продаж в&nbsp;нескольких крупных компаниях. После того, как подобрал себе курс по&nbsp;веб-разработке, решил уйти с&nbsp;постоянной работы, чтобы полностью сконцентрироваться на&nbsp;учёбе. Стремлюсь начать карьеру в&nbsp;IT.</p>
+				<p className="about-me__biography">Я&nbsp;родился и&nbsp;живу в&nbsp;Саратове, закончил факультет экономики СГУ. У&nbsp;меня есть жена и&nbsp;дочь. Я&nbsp;люблю слушать музыку, а&nbsp;ещё увлекаюсь бегом. Недавно начал кодить.
+					С 2015 года работал в&nbsp;компании &laquo;СКБ Контур&raquo;. После того, как прошёл курс по&nbsp;веб-разработке, начал заниматься фриланс-заказами и ушёл с&nbsp;постоянной работы.</p>
 
 				<a href="https://github.com/8Gato8" className="about-me__link" rel="noreferrer" target="_blank">Github</a>
 			</div>
