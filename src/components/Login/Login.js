@@ -42,9 +42,9 @@ function Login({ setCurrentPath, currentPath }) {
 						<span className="form__field-caption">E-mail</span>
 						<input
 							id="input-email"
-							className={`form__input form__input_type_email 
+							className={`form__input input form__input_type_email 
 							${email.isDirty && !email.isInputValid
-									? 'form__input_type_error'
+									? 'input_type_error'
 									: ''
 								}`}
 							value={email.value}
@@ -58,9 +58,9 @@ function Login({ setCurrentPath, currentPath }) {
 							required
 						/>
 						<span className={
-							`form__input-error-message 
+							`input-error-message 
 							${email.isDirty && !email.isInputValid
-								? 'form__input-error-message_visible'
+								? 'input-error-message_visible'
 								: ''
 							}`}
 						>
@@ -75,9 +75,9 @@ function Login({ setCurrentPath, currentPath }) {
 						<span className="form__field-caption">Пароль</span>
 						<input
 							id="input-password"
-							className={`form__input 
+							className={`form__input input
 							${password.isDirty && !password.isInputValid
-									? 'form__input_type_error'
+									? 'input_type_error'
 									: ''
 								}`}
 							value={password.value}
@@ -91,9 +91,9 @@ function Login({ setCurrentPath, currentPath }) {
 							required
 						/>
 						<span className={
-							`form__input-error-message 
+							`input-error-message 
 							${password.isDirty && !password.isInputValid
-								? 'form__input-error-message_visible'
+								? 'input-error-message_visible'
 								: ''
 							}`}
 						>

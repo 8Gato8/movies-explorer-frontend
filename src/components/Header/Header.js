@@ -23,7 +23,7 @@ function Header() {
 		}>
 
 			<div className={`${isLoggedIn ? 'header__container_type_logged_in' : 'header__container_type_not_logged_in'} header__container`}>
-				<Logo additionalLinkStyles={''} additionalImgStyles={'header__logo'} />
+				<Logo additionalLinkStyles={''} />
 				<Navigation />
 			</div>
 

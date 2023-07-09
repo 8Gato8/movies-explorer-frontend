@@ -7,10 +7,8 @@
 	grid-template-areas:
 		"heading"
 		"data"
-		"edit"
-		"logout";
-	max-width: 410px;
-	min-width: 260px;
+		"button-section";
+	width: 410px;
 	margin: auto;
 }
 
@@ -24,7 +22,7 @@
 	display: flex;
 	flex-direction: column;
 	row-gap: 17px;
-	margin-bottom: 220px;
+	margin-bottom: 204px;
 	grid-area: data;
 }
 
@@ -33,12 +31,10 @@
 	justify-content: space-between;
 	position: relative;
 	min-height: 30px;
-	border-bottom: 1px solid #424242;
 }
 
-.profile__data-block:last-child {
-	border: 0;
-	min-height: unset;
+.profile__data-block:first-child {
+	border-bottom: 1px solid #424242;
 }
 
 .profile__data-unit {
@@ -46,6 +42,7 @@
 	font-size: 11px;
 	font-weight: 500;
 	line-height: normal;
+	align-self: flex-start;
 }
 
 .profile__button {
@@ -59,19 +56,26 @@
 	justify-self: center;
 }
 
+.profile__buttons {
+	display: flex;
+	flex-direction: column;
+	row-gap: 15px;
+}
+
+.button-section {
+	grid-area: button-section;
+}
+
 .profile__button:hover {
 	opacity: .6;
 }
 
 .profile__button_type_edit {
 	color: #fff;
-	margin-bottom: 16px;
-	grid-area: edit;
 }
 
 .profile__button_type_logout {
 	color: #EE3465;
-	grid-area: logout;
 }
 
 @media (max-width: 798px) {
@@ -80,7 +84,7 @@
 	}
 
 	.profile__data {
-		margin-bottom: 210px;
+		margin-bottom: 194px;
 	}
 }
 
@@ -103,8 +107,7 @@
 			"heading"
 			"data"
 			"."
-			"edit"
-			"logout";
+			"button-section";
 	}
 
 	.profile__heading {

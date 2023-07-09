@@ -1,0 +1,32 @@
+.submit-button {
+	padding: 15px 0;
+	border: 0;
+	border-radius: 3px;
+	background-color: #4285F4;
+	color: #fff;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: normal;
+	transition: opacity .2s linear;
+	cursor: pointer;
+}
+
+.submit-button:hover {
+	opacity: .6;
+}
+
+.submit-button_disabled {
+	background-color: #424242;
+	opacity: .3;
+	cursor: default;
+}
+
+.submit-button_disabled:hover {
+	opacity: .3;
+}
+
+@media (max-width: 398px) {
+	.submit-button {
+		font-size: 12px;
+	}
+}

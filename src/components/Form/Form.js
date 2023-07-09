@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import Logo from "../Logo/Logo";
 
 import './Form.css';
+import SubmitButton from '../SubmitButton/SubmitButton';
 
 function Form({
 	headingText,
@@ -21,7 +22,7 @@ function Form({
 	return (
 		<section className="form-wrapper">
 
-			<Logo additionalLinkStyles={'form-wrapper__logo-link'} additionalImgStyles={'form-wrapper__logo'} />
+			<Logo additionalLinkStyles={'form-wrapper__logo-link'} />
 
 			<h1 className="form-heading heading">{headingText}</h1>
 
@@ -29,18 +30,7 @@ function Form({
 
 				{children}
 
-				<button
-					className={`form__submit-button
-					${!isFormValid
-							? 'form__submit-button_disabled'
-							: ''
-						}
-					`}
-					type="submit"
-					disabled={!isFormValid}
-				>
-					{buttonText}
-				</button>
+				<SubmitButton isFormValid={isFormValid} buttonText={buttonText} additionalButtonStyles={'form__submit-button'} />
 
 			</form>
 

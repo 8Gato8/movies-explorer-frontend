@@ -10,7 +10,6 @@
 	transition: opacity .2s linear;
 	padding: 0;
 	background: url('../../images/nav-menu-bar.svg') 50%/auto auto no-repeat;
-	/* , url('../../images/nav-menu-bar.svg') center/auto auto no-repeat, url('../../images/nav-menu-bar.svg') 0 100%/auto auto no-repeat; */
 }
 
 @media (max-width: 786px) {

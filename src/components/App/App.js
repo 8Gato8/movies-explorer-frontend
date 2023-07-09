@@ -20,35 +20,48 @@ import PageNotFound from '../PageNotFound/PageNotFound';
 
 import { IsLoggedInContext } from '../../contexts/IsLoggedInContext';
 import { CurrentPathContext } from '../../contexts/CurrentPathContext';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 import { movies } from '../../utils/moviesDataTemp/movies';
 import { savedMovies } from '../../utils/moviesDataTemp/savedMovies';
 
 function App() {
 
-  const [isLoggedIn, setIsLoggedIn] = React.useState(true);
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [currentPath, setCurrentPath] = React.useState('');
+  const [currentUser, setCurrentUser] = React.useState({ name: 'Виталий', email: 'pochta@yandex.ru' });
+
+  const handleUserUpdate = React.useCallback(async function (newUserInfo) {
+    setCurrentUser(newUserInfo);
+  }, [])
+
+  const logout = React.useCallback(function () {
+
+    setIsLoggedIn(false);
+  }, [])
 
   return (
     <div className='app'>
-      <CurrentPathContext.Provider value={currentPath}>
-        <IsLoggedInContext.Provider value={isLoggedIn}>
-          <Header />
+      <CurrentUserContext.Provider value={currentUser}>
+        <CurrentPathContext.Provider value={currentPath}>
+          <IsLoggedInContext.Provider value={isLoggedIn}>
+            <Header />
 
-          <Routes>
+            <Routes>
 
-            <Route path="/" element={<Main setCurrentPath={setCurrentPath} currentPath={'/'} />} />
-            <Route path="/signup" element={<Register setCurrentPath={setCurrentPath} currentPath={'/signup'} />} />
-            <Route path="/signin" element={<Login setCurrentPath={setCurrentPath} currentPath={'/signin'} />} />
-            <Route path="/movies" element={<Movies setCurrentPath={setCurrentPath} currentPath={'/movies'} movies={movies} />} />
-            <Route path="/saved-movies" element={<Movies setCurrentPath={setCurrentPath} currentPath={'/saved-movies'} movies={savedMovies} />} />
-            <Route path="/profile" element={<Profile setCurrentPath={setCurrentPath} currentPath={'/profile'} />} />
-            <Route path="*" element={<PageNotFound setCurrentPath={setCurrentPath} currentPath={'*'} />} />
-          </Routes>
+              <Route path="/" element={<Main setCurrentPath={setCurrentPath} currentPath={'/'} />} />
+              <Route path="/signup" element={<Register setCurrentPath={setCurrentPath} currentPath={'/signup'} />} />
+              <Route path="/signin" element={<Login setCurrentPath={setCurrentPath} currentPath={'/signin'} />} />
+              <Route path="/movies" element={<Movies setCurrentPath={setCurrentPath} currentPath={'/movies'} movies={movies} />} />
+              <Route path="/saved-movies" element={<Movies setCurrentPath={setCurrentPath} currentPath={'/saved-movies'} movies={savedMovies} />} />
+              <Route path="/profile" element={<Profile setCurrentPath={setCurrentPath} handleUserUpdate={handleUserUpdate} logout={logout} currentPath={'/profile'} />} />
+              <Route path="*" element={<PageNotFound setCurrentPath={setCurrentPath} currentPath={'*'} />} />
+            </Routes>
 
-          <Footer />
-        </IsLoggedInContext.Provider >
-      </CurrentPathContext.Provider>
+            <Footer />
+          </IsLoggedInContext.Provider >
+        </CurrentPathContext.Provider>
+      </CurrentUserContext.Provider>
     </div>
   );
 }

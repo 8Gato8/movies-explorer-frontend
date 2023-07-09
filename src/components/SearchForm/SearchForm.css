@@ -61,6 +61,13 @@
 	background-color: transparent;
 }
 
+.search__form-search-input:-webkit-autofill,
+.search__form-search-input:hover,
+.search__form-search-input:focus,
+.search__form-search-input:active {
+	-webkit-box-shadow: 0 0 0px 1000px #222 inset;
+}
+
 .search__form-search-input::placeholder {
 	color: #8B8B8B;
 }

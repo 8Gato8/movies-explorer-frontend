@@ -6,9 +6,9 @@ import './Logo.css';
 import logoSrc from '../../images/logo.svg';
 
 
-function Logo({ additionalLinkStyles, additionalImgStyles }) {
+function Logo({ additionalLinkStyles }) {
 	return (
-		<Link className={additionalLinkStyles} to="/"><img className={`logo ${additionalImgStyles}`} src={logoSrc} alt="Лого проекта" /></Link>
+		<Link className={additionalLinkStyles} to="/"><img className="logo" src={logoSrc} alt="Лого проекта" /></Link>
 	)
 }
 

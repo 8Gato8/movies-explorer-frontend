@@ -43,9 +43,9 @@ function Register({ setCurrentPath, currentPath }) {
 						<span className="form__field-caption">Имя</span>
 						<input
 							id="input-name"
-							className={`form__input 
+							className={`form__input input
 							${name.isDirty && !name.isInputValid
-									? 'form__input_type_error'
+									? 'input_type_error'
 									: ''
 								}`}
 							value={name.value}
@@ -59,9 +59,9 @@ function Register({ setCurrentPath, currentPath }) {
 							required
 						/>
 						<span className={
-							`form__input-error-message 
+							`input-error-message 
 							${name.isDirty && !name.isInputValid
-								? 'form__input-error-message_visible'
+								? 'input-error-message_visible'
 								: ''
 							}`}
 						>
@@ -75,9 +75,9 @@ function Register({ setCurrentPath, currentPath }) {
 						<span className="form__field-caption">E-mail</span>
 						<input
 							id="input-email"
-							className={`form__input form__input_type_email 
+							className={`form__input input form__input_type_email 
 							${email.isDirty && !email.isInputValid
-									? 'form__input_type_error'
+									? 'input_type_error'
 									: ''
 								}`}
 							value={email.value}
@@ -91,9 +91,9 @@ function Register({ setCurrentPath, currentPath }) {
 							required
 						/>
 						<span className={
-							`form__input-error-message 
+							`input-error-message 
 							${email.isDirty && !email.isInputValid
-								? 'form__input-error-message_visible'
+								? 'input-error-message_visible'
 								: ''
 							}`}
 						>
@@ -108,9 +108,9 @@ function Register({ setCurrentPath, currentPath }) {
 						<span className="form__field-caption">Пароль</span>
 						<input
 							id="input-password"
-							className={`form__input 
+							className={`form__input input
 							${password.isDirty && !password.isInputValid
-									? 'form__input_type_error'
+									? 'input_type_error'
 									: ''
 								}`}
 							value={password.value}
@@ -124,9 +124,9 @@ function Register({ setCurrentPath, currentPath }) {
 							required
 						/>
 						<span className={
-							`form__input-error-message 
+							`input-error-message 
 							${password.isDirty && !password.isInputValid
-								? 'form__input-error-message_visible'
+								? 'input-error-message_visible'
 								: ''
 							}`}
 						>

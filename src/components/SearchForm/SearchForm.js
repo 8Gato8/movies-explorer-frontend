@@ -1,13 +1,16 @@
 import React from 'react';
-
 import './SearchForm.css';
 
 function SearchForm() {
 
+	const onSubmit = (e) => {
+		e.preventDefault();
+	}
+
 	return (
 		<article className="search">
 			<div className="search__container">
-				<form className="search__form">
+				<form className="search__form" onSubmit={onSubmit}>
 
 					<fieldset className="search__form-search-fieldset">
 
@@ -18,6 +21,7 @@ function SearchForm() {
 							<input type="text" placeholder="Фильм"
 								className="search__form-search-input"
 								name="movie"
+								minLength="2"
 								required
 							/>
 
