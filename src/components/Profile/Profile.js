@@ -11,18 +11,18 @@ function Profile({ setCurrentPath, currentPath }) {
 	return (
 		<div className="profile-wrapper">
 			<main className="profile">
-				<h1 className="profile__heading heading">Привет, Сергей!</h1>
+				<h1 className="profile__heading heading">Привет, Виталий!</h1>
 
 				<div className="profile__data">
 
 					<div className="profile__data-block">
 						<p className="profile__data-unit">Имя</p>
-						<p className="profile__data-unit">Сергей</p>
+						<p className="profile__data-unit">Виталий</p>
 					</div>
 
 					<div className="profile__data-block">
 						<p className="profile__data-unit">E-mail</p>
-						<p className="profile__data-unit">sergey.sckotcelias@yandex.ru</p>
+						<p className="profile__data-unit">pochta@yandex.ru</p>
 					</div>
 
 				</div>

@@ -1,13 +1,14 @@
 .form-wrapper {
-	min-width: 396px;
+	width: 396px;
 	margin: auto;
 	display: grid;
 	grid-template-rows: repeat(2, min-content) 1fr min-content;
 	justify-items: center;
+	min-height: 563px;
 }
 
 .form-wrapper__logo-link {
-	margin-bottom: 40px;
+	margin-bottom: 38px;
 	justify-self: start;
 }
 
@@ -60,6 +61,7 @@
 .form {
 	justify-self: stretch;
 	display: grid;
+	align-content: space-between;
 	margin-bottom: 16px;
 }
 
@@ -70,30 +72,34 @@
 .form__fieldset {
 	padding: 0;
 	border: 0;
-	margin: 0 0 152px 0;
+	margin: 0;
 	display: flex;
 	flex-direction: column;
+	row-gap: 24px;
 }
 
 .form__field {
 	display: flex;
+	position: relative;
 	flex-direction: column;
 	row-gap: 5px;
+	border-bottom: 1px solid #424242;
+	min-height: 45px;
+}
+
+.form__field-caption {
 	color: #8B8B8B;
 	font-size: 10px;
 	font-weight: 400;
 	line-height: normal;
-	min-height: 75px;
 }
 
 .form__input {
 	color: #fff;
 	font-size: 14px;
-	min-height: 37px;
 	border: 0;
 	padding: 0;
 	background-color: transparent;
-	border-bottom: 1px solid #424242;
 	outline: none;
 }
 
@@ -106,14 +112,16 @@
 }
 
 .form__input-error-message {
+	position: absolute;
 	display: none;
+	overflow: hidden;
 	width: 100%;
 	height: 12px;
 	top: 50px;
 	color: #EE3465;
 	font-size: 10px;
 	font-weight: 400;
-	line-height: normal;
+	line-height: 1;
 }
 
 .form__input-error-message_visible {
@@ -153,7 +161,7 @@
 
 @media (max-width: 470px) {
 	.form-wrapper {
-		min-width: 260px;
+		width: 260px;
 	}
 }
 

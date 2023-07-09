@@ -39,7 +39,7 @@ function Login({ setCurrentPath, currentPath }) {
 				<fieldset className="form__fieldset">
 
 					<label htmlFor="input-email" className="form__field">
-						E-mail
+						<span className="form__field-caption">E-mail</span>
 						<input
 							id="input-email"
 							className={`form__input form__input_type_email 
@@ -72,7 +72,7 @@ function Login({ setCurrentPath, currentPath }) {
 					</label>
 
 					<label htmlFor="input-password" className="form__field">
-						Пароль
+						<span className="form__field-caption">Пароль</span>
 						<input
 							id="input-password"
 							className={`form__input 

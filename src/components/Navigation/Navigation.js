@@ -7,10 +7,10 @@ import Menu from "../Menu/Menu";
 import './Navigation.css';
 
 function Navigation() {
-	const [isSidebarOpen, setIsSidebarOpensetSidebar] = React.useState(false);
+	const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
 	const isLoggedIn = React.useContext(IsLoggedInContext);
 
-	const toggleSidebar = () => setIsSidebarOpensetSidebar(!isSidebarOpen);
+	const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
 	const useMediaQuery = (value) => {
 
@@ -27,7 +27,7 @@ function Navigation() {
 		return match;
 	}
 
-	const isSidebarTooWide = useMediaQuery("(min-width: 768px)");
+	const isSidebarTooWide = useMediaQuery("(min-width: 787px)");
 
 	return (
 		<nav className="nav">

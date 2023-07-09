@@ -12,7 +12,7 @@
 	grid-template-columns: repeat(2, auto);
 	grid-template-rows: repeat(2, auto);
 	grid-template-areas:
-		"title like-button"
+		"title button"
 		"duration duration";
 	padding: 0 16px 16px;
 	row-gap: 10px;
@@ -24,9 +24,9 @@
 	font-size: 13px;
 	font-weight: 500;
 	align-self: center;
-	text-overflow: ellipsis;
 	white-space: nowrap;
 	width: 260px;
+	text-overflow: ellipsis;
 	overflow: hidden;
 }
 
@@ -43,13 +43,14 @@
 	border-radius: 6px 6px 0 0;
 }
 
-.movie-card__like-button {
+.movie-card__button {
 	border: none;
 	cursor: pointer;
+	transition: opacity .2s linear;
 	width: 30px;
 	height: 30px;
 	padding: 0;
-	grid-area: like-button;
+	grid-area: button;
 	background-color: transparent;
 	transition: opacity .2s linear;
 	justify-self: end;
@@ -59,15 +60,15 @@
 	opacity: .6;
 }
 
-.movie-card__like-button_type_like {
+.movie-card__button_active {
 	background: url('../../images/like-icon.svg') 50% / contain no-repeat;
 }
 
-.movie-card__like-button_type_liked {
+.movie-card__button_disabled {
 	background: url('../../images/liked-icon.svg') 50% / contain no-repeat;
 }
 
-.movie-card__like-button_type_delete {
+.movie-card__button_deleted {
 	background: url('../../images/delete-icon.svg') 50% / contain no-repeat;
 }
 

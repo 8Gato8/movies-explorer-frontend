@@ -44,7 +44,7 @@
 }
 
 .techs__tech {
-	height: 60px;
+	min-height: 60px;
 	padding: 21px 0;
 	font-size: 14px;
 	letter-spacing: -0.56px;

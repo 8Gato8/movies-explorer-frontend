@@ -7,10 +7,16 @@ function MoviesCard({ movie }) {
 
 	const currentPath = React.useContext(CurrentPathContext);
 
+	const [isLiked, setIsLiked] = React.useState(false);
+
+	const onLikeClick = () => {
+		setIsLiked(!isLiked);
+	}
+
 	const movieCardButtonClassName = (
-		`movie-card__like-button ${false
-			? 'movie-card__like-button_type_like'
-			: 'movie-card__like-button_type_liked'
+		`movie-card__button ${isLiked
+			? 'movie-card__button_active'
+			: 'movie-card__button_disabled'
 		}`
 	);
 
@@ -28,10 +34,10 @@ function MoviesCard({ movie }) {
 				<h2 className="movie-card__title">{movie.name}</h2>
 				<p className="movie-card__duration">{movie.duration}</p>
 
-				{currentPath === '/movies' && <button type="button" className={movieCardButtonClassName}>
+				{currentPath === '/movies' && <button type="button" onClick={onLikeClick} className={movieCardButtonClassName}>
 				</button>}
 
-				{currentPath === '/saved-movies' && <button type="button" className='movie-card__like-button movie-card__like-button_type_delete'>
+				{currentPath === '/saved-movies' && <button type="button" className='movie-card__button movie-card__button_deleted'>
 				</button>}
 			</div>
 

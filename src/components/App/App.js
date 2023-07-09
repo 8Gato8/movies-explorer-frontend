@@ -26,7 +26,7 @@ import { savedMovies } from '../../utils/moviesDataTemp/savedMovies';
 
 function App() {
 
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const [isLoggedIn, setIsLoggedIn] = React.useState(true);
   const [currentPath, setCurrentPath] = React.useState('');
 
   return (
