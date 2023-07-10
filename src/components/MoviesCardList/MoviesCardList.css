@@ -16,7 +16,7 @@
 	padding: 0;
 	display: grid;
 	gap: 40px 23px;
-	grid-template-columns: repeat(3, auto);
+	grid-template-columns: repeat(3, minmax(300px, 364px));
 	grid-template-rows: min-content;
 }
 
