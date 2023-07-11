@@ -1,0 +1,22 @@
+.student-info {
+	display: flex;
+	flex-direction: column;
+	row-gap: 100px;
+	max-width: 1280px;
+	margin: 0 auto;
+	padding: 110px 70px 105px;
+}
+
+@media (max-width: 786px) {
+	.student-info {
+		padding: 90px 50px 67px;
+		row-gap: 90px;
+	}
+}
+
+@media (max-width: 570px) {
+	.student-info {
+		padding: 70px 14px 50px;
+		row-gap: 70px;
+	}
+}

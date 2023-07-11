@@ -1,0 +1,15 @@
+.blur {
+	position: absolute;
+	width: 100vw;
+	height: 100vh;
+	top: 0;
+	right: 520px;
+	background-color: #000;
+	opacity: 0.3;
+}
+
+@media (max-width: 598px) {
+	.blur {
+		width: 0;
+	}
+}

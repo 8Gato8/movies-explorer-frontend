@@ -1,0 +1,30 @@
+.header_type_hidden {
+	display: none;
+}
+
+.header_theme_landing {
+	background-color: #073042;
+}
+
+.header__container {
+	display: grid;
+	grid-template-columns: 38px 1fr;
+	align-items: center;
+	justify-content: space-between;
+	max-width: 1280px;
+	margin: 0 auto;
+	padding: 0 70px;
+	min-height: 74px;
+}
+
+@media (max-width: 786px) {
+	.header__container {
+		padding: 0 30px
+	}
+}
+
+@media (max-width: 398px) {
+	.header__container {
+		padding: 0 14px
+	}
+}

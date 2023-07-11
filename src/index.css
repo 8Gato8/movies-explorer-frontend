@@ -1,0 +1,30 @@
+/*normalize and fonts*/
+
+@import url(./vendor/normalize.css);
+@import url(./vendor/fonts/fonts.css);
+
+/* general styles */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  overflow-y: scroll;
+}
+
+body {
+  position: relative;
+  margin: 0;
+  background-color: #202020;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -moz-text-size-adjust: 100%;
+}
+
+/* generalStyles */
+
+@import url(./blocks/generalStyles/section-heading.css);
+@import url(./blocks/generalStyles/heading.css);
+@import url(./blocks/generalStyles/redirection-link.css);
+@import url(./blocks/generalStyles/input.css);

@@ -1,0 +1,142 @@
+.promo-wrapper {
+	background-color: #073042;
+}
+
+.promo {
+	display: grid;
+	grid-template-areas:
+		"heading logo"
+		"hint logo"
+		"link logo";
+	grid-template-columns: minmax(min-content, 640px) min-content;
+	grid-template-rows: repeat(3, min-content);
+	justify-content: space-between;
+	padding: 75px 70px;
+	max-width: 1280px;
+	margin: 0 auto;
+}
+
+.promo__heading {
+	margin: 0 0 36px 0;
+	font-weight: normal;
+	font-size: 50px;
+	line-height: 1.16;
+	grid-area: heading;
+}
+
+.promo__hint {
+	margin: 0 0 146px 0;
+	font-size: 13px;
+	opacity: 0.5;
+	grid-area: hint;
+	max-width: 310px;
+	line-height: normal;
+}
+
+.promo__logo {
+	grid-area: logo;
+}
+
+.promo__nav-button {
+	align-self: center;
+	background-color: transparent;
+	min-height: 36px;
+	padding: 0 19px;
+	border-radius: 3px;
+	border: 1px solid #fff;
+	grid-area: link;
+	max-width: 130px;
+	cursor: pointer;
+	transition: opacity .2s linear;
+}
+
+.promo__nav-button:hover {
+	opacity: .6;
+}
+
+.promo__link {
+	text-decoration: none;
+	color: #fff;
+	font-size: 12px;
+	font-weight: 500;
+	line-height: 1.33;
+}
+
+.promo__nowrap-second-line {
+	white-space: nowrap;
+}
+
+@media (max-width: 398px) {
+	.promo__nowrap-first-line {
+		white-space: nowrap;
+	}
+}
+
+@media (max-width: 1120px) {
+	.promo {
+		grid-template-areas:
+			"logo"
+			"heading"
+			"hint"
+			"link";
+		grid-template-columns: 1fr;
+		grid-template-rows: repeat(4, min-content);
+		place-content: center;
+		place-items: center;
+		text-align: center;
+		padding: 140px 70px 75px;
+	}
+
+	.promo__logo {
+		margin-bottom: 48px;
+	}
+
+	.promo__heading {
+		margin-bottom: 22px;
+	}
+
+	.promo__hint {
+		margin-bottom: 92px;
+	}
+}
+
+@media (max-width: 786px) {
+	.promo {
+		padding-left: 44px;
+		padding-right: 44px;
+	}
+
+	.promo__heading {
+		font-size: 40px;
+		margin-bottom: 22px;
+		line-height: 1.25;
+	}
+
+	.promo__hint {
+		max-width: 260px;
+	}
+
+}
+
+@media (max-width: 428px) {
+	.promo {
+		padding: 70px 10px 30px;
+		grid-template-columns: min-content;
+	}
+
+	.promo__heading {
+		font-size: 30px;
+		margin-bottom: 24px;
+		letter-spacing: -1.2px;
+		line-height: 1.27;
+	}
+
+	.promo__hint {
+		margin-bottom: 80px;
+	}
+
+	.promo__logo {
+		margin-bottom: 44px;
+		width: 210px;
+	}
+}

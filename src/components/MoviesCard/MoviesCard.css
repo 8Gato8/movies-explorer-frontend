@@ -1,0 +1,92 @@
+.movie-card {
+	display: flex;
+	row-gap: 6px;
+	flex-direction: column;
+	border-radius: 6px 6px 0 0;
+	background: #222;
+	box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.08);
+}
+
+.movie-card__movie-information {
+	display: grid;
+	grid-template-columns: repeat(2, auto);
+	grid-template-rows: repeat(2, auto);
+	grid-template-areas:
+		"title button"
+		"duration duration";
+	padding: 0 16px 16px;
+	row-gap: 10px;
+}
+
+.movie-card__title {
+	grid-area: title;
+	margin: 0;
+	font-size: 13px;
+	font-weight: 500;
+	align-self: center;
+	white-space: nowrap;
+	width: 260px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.movie-card__duration {
+	grid-area: duration;
+	margin: 0;
+	color: #8B8B8B;
+	font-size: 11px;
+}
+
+.movie-card__img {
+	width: 100%;
+	min-height: 168px;
+	border-radius: 6px 6px 0 0;
+}
+
+.movie-card__button {
+	border: none;
+	cursor: pointer;
+	transition: opacity .2s linear;
+	width: 30px;
+	height: 30px;
+	padding: 0;
+	grid-area: button;
+	background-color: transparent;
+	transition: opacity .2s linear;
+	justify-self: end;
+}
+
+.movie-card__button:hover {
+	opacity: .6;
+}
+
+.movie-card__button_active {
+	background: url('../../images/like-icon.svg') 50% / contain no-repeat;
+}
+
+.movie-card__button_disabled {
+	background: url('../../images/liked-icon.svg') 50% / contain no-repeat;
+}
+
+.movie-card__button_deleted {
+	background: url('../../images/delete-icon.svg') 50% / contain no-repeat;
+}
+
+@media (max-width: 786px) {
+	.movie-card__movie-information {
+		row-gap: 8px;
+		padding: 0 14px 14px;
+	}
+}
+
+@media (max-width: 398px) {
+	.movie-card__movie-information {
+		row-gap: 6px;
+		padding-right: 10px;
+	}
+
+	.movie-card__title {
+		font-size: 12px;
+		max-width: 240px;
+	}
+}

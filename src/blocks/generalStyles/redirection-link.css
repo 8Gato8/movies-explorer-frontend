@@ -1,0 +1,19 @@
+.redirection-link {
+	color: #4285F4;
+	text-decoration: none;
+	font-size: 14px;
+	padding: 0;
+	line-height: normal;
+	transition: opacity .2s linear;
+	cursor: pointer;
+}
+
+.redirection-link:hover {
+	opacity: .6;
+}
+
+@media (max-width: 398px) {
+	.redirection-link {
+		font-size: 12px;
+	}
+}
