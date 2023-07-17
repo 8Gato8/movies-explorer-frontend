@@ -1,48 +1,54 @@
 import React from 'react';
-import { CurrentPathContext } from '../../contexts/CurrentPathContext';
 
 import './MoviesCard.css';
 
-function MoviesCard({ movie }) {
+import { convertMinutes } from '../../utils/functions/convertMinutes';
+import { isMovieAlreadySaved } from '../../utils/functions/isMovieAlreadySaved';
 
-	const currentPath = React.useContext(CurrentPathContext);
+function MoviesCard({
+	movie,
+	savedMovies,
+	buttonStyle,
+	handleCardLikeClick,
+	handleCardDeleteClick
+}) {
 
-	const [isLiked, setIsLiked] = React.useState(false);
+	const [isLiked, setIsLiked] = React.useState(isMovieAlreadySaved(movie, savedMovies));
 
-	const onLikeClick = () => {
+	const onLike = () => {
+		handleCardLikeClick(movie, isLiked);
 		setIsLiked(!isLiked);
 	}
 
-	const movieCardButtonClassName = (
-		`movie-card__button ${isLiked
-			? 'movie-card__button_active'
-			: 'movie-card__button_disabled'
-		}`
-	);
+	const onDelete = () => {
+		handleCardDeleteClick(movie);
+	}
 
 	return (
 		<li className="movies-cards__card-list-item movie-card">
 
-			<img
-				className="movie-card__img"
-				src={movie.image}
-				alt={movie.name}
-			/>
-
+			<a className="movie-card__trailer-link" href={movie.trailerLink} rel='noreferrer' target='_blank'>
+				<img
+					className="movie-card__img"
+					src={movie.image}
+					alt={movie.nameRU}
+				/>
+			</a>
 
 			<div className="movie-card__movie-information">
-				<h2 className="movie-card__title">{movie.name}</h2>
-				<p className="movie-card__duration">{movie.duration}</p>
+				<h2 className="movie-card__title">{movie.nameRU}</h2>
+				<p className="movie-card__duration">{convertMinutes(movie.duration)}</p>
 
-				{currentPath === '/movies' && <button type="button" onClick={onLikeClick} className={movieCardButtonClassName}>
+				{buttonStyle === 'delete' && <button type="button" onClick={onDelete} className='movie-card__button movie-card__button_delete'>
 				</button>}
 
-				{currentPath === '/saved-movies' && <button type="button" className='movie-card__button movie-card__button_deleted'>
+				{buttonStyle === 'like' && <button type="button" onClick={onLike} className={`movie-card__button ${isLiked ? 'movie-card__button_active' : 'movie-card__button_disabled'}`}>
 				</button>}
+
 			</div>
 
 		</li >
 	)
-}
+};
 
 export default MoviesCard;

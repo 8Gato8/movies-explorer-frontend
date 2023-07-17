@@ -3,7 +3,9 @@ import { NavLink } from "react-router-dom";
 import Logo from "../Logo/Logo";
 
 import './Form.css';
+
 import SubmitButton from '../SubmitButton/SubmitButton';
+import ApiErrorMessage from '../ApiMessage/ApiMessage';
 
 function Form({
 	headingText,
@@ -12,11 +14,22 @@ function Form({
 	linkText,
 	isFormValid,
 	redirectionPath,
-	children
+	onSubmit,
+	formValues,
+	setCurrentUser,
+	children,
 }) {
 
-	const onSubmit = (e) => {
+	const handleSubmit = async (e) => {
+
 		e.preventDefault();
+
+		await onSubmit(formValues);
+
+		if (setCurrentUser) {
+			setCurrentUser(formValues);
+		}
+
 	}
 
 	return (
@@ -26,11 +39,13 @@ function Form({
 
 			<h1 className="form-heading heading">{headingText}</h1>
 
-			<form className="form" onSubmit={onSubmit} noValidate>
+			<form className="form" onSubmit={handleSubmit} noValidate>
 
 				{children}
 
 				<SubmitButton isFormValid={isFormValid} buttonText={buttonText} additionalButtonStyles={'form__submit-button'} />
+
+				<ApiErrorMessage additionalStyles='api-error-message_style_form' />
 
 			</form>
 

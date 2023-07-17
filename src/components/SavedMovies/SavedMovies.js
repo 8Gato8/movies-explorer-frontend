@@ -3,16 +3,16 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import MoviesCard from '../MoviesCard/MoviesCard';
 
-import './Movies.css';
+import './SavedMovies.css';
 
 import { sortMovies } from '../../utils/functions/sortMovies';
 
-function Movies({
+function SavedMovies({
 	movies,
 	savedMovies,
-	handleCardLikeClick,
+	handleCardDeleteClick,
 	getSearchedMovies,
-	initialMoviesArray,
+	initialSavedMoviesArray,
 	handleMoreButtonClick,
 	moviesLength
 }) {
@@ -22,11 +22,11 @@ function Movies({
 	return (
 		<main className="movies">
 
-			<SearchForm getSearchedMovies={getSearchedMovies} moviesArray={initialMoviesArray} shouldUseStoredData={true} />
+			<SearchForm getSearchedMovies={getSearchedMovies} moviesArray={initialSavedMoviesArray} shouldUseStoredData={false} />
 
 			<MoviesCardList
 				movies={movies}
-				hasMoreButton={true}
+				hasMoreButton={false}
 				handleMoreButtonClick={handleMoreButtonClick}
 			>
 
@@ -40,21 +40,21 @@ function Movies({
 								director: movie.director,
 								duration: movie.duration,
 								movieId: movie.id,
-								thumbnail: `https://api.nomoreparties.co/${movie.image.formats.thumbnail.url}`,
-								image: `https://api.nomoreparties.co/${movie.image.url}`,
+								image: movie.image,
+								thumbnail: movie.thumbnail,
 								nameEN: movie.nameEN,
 								nameRU: movie.nameRU,
 								trailerLink: movie.trailerLink,
-								year: movie.year
+								year: movie.year,
+								_id: movie._id
 							}
 						}
 						key={i}
 						savedMovies={savedMovies}
-						buttonStyle={'like'}
-						handleCardLikeClick={handleCardLikeClick}
-					>
+						buttonStyle={'delete'}
+						handleCardDeleteClick={handleCardDeleteClick}
+					/>
 
-					</MoviesCard>
 				))}
 
 			</MoviesCardList >
@@ -63,4 +63,4 @@ function Movies({
 	)
 }
 
-export default Movies;
+export default SavedMovies;

@@ -1,16 +1,21 @@
 import React from 'react'
 import Form from '../Form/Form';
-import { regex } from '../../utils/regexEmailValidation';
-import { useInput } from '../../utils/validation';
+import { regex } from '../../utils/constants/regexEmailValidation';
+import { useInput } from '../../utils/functions/validation';
+
+import { Navigate } from 'react-router-dom';
 
 import './Login.css';
 
-function Login({ setCurrentPath, currentPath }) {
+import { IsLoggedInContext } from '../../contexts/IsLoggedInContext';
+
+function Login({ setCurrentPath, path, setCurrentUser, login }) {
 
 	React.useEffect(() => {
-		setCurrentPath(currentPath);
-	}, [setCurrentPath, currentPath])
+		setCurrentPath(path);
+	}, [setCurrentPath, path])
 
+	const isLoggedIn = React.useContext(IsLoggedInContext);
 	const [isFormValid, setIsFormValid] = React.useState(false);
 
 	const email = useInput('', { isEmpty: true, minLength: 2, regex });
@@ -24,6 +29,10 @@ function Login({ setCurrentPath, currentPath }) {
 		}
 	}, [email.isInputValid, password.isInputValid]);
 
+	if (isLoggedIn) {
+		return <Navigate to="/movies" />
+	}
+
 	return (
 		<main className="login">
 
@@ -34,6 +43,9 @@ function Login({ setCurrentPath, currentPath }) {
 				linkText={'Регистрация'}
 				isFormValid={isFormValid}
 				redirectionPath={'/signup'}
+				onSubmit={login}
+				formValues={{ email: email.value, password: password.value }}
+				setCurrentUser={setCurrentUser}
 			>
 
 				<fieldset className="form__fieldset">

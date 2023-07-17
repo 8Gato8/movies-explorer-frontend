@@ -2,11 +2,10 @@ import React from 'react';
 import './EditProfileForm.css';
 import SubmitButton from '../SubmitButton/SubmitButton';
 
-import { regex } from '../../utils/regexEmailValidation';
-import { useInput } from '../../utils/validation';
+import { regex } from '../../utils/constants/regexEmailValidation';
+import { useInput } from '../../utils/functions/validation';
 
-
-function EditProfileForm({ handleUserUpdate, toggleEditForm }) {
+function EditProfileForm({ toggleEditForm, editUserInfo }) {
 
 	const [isFormValid, setIsFormValid] = React.useState(false);
 
@@ -15,8 +14,8 @@ function EditProfileForm({ handleUserUpdate, toggleEditForm }) {
 
 	const onSubmit = (e) => {
 		e.preventDefault();
-		const data = { name: name.value, email: email.value };
-		handleUserUpdate(data);
+		const formValues = { name: name.value, email: email.value };
+		editUserInfo(formValues);
 		toggleEditForm();
 	}
 

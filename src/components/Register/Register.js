@@ -1,16 +1,21 @@
 import React from 'react';
 import Form from '../Form/Form';
-import { regex } from '../../utils/regexEmailValidation';
-import { useInput } from '../../utils/validation';
+import { regex } from '../../utils/constants/regexEmailValidation';
+import { useInput } from '../../utils/functions/validation';
+
+import { Navigate } from 'react-router-dom';
 
 import './Register.css';
 
-function Register({ setCurrentPath, currentPath }) {
+import { IsLoggedInContext } from '../../contexts/IsLoggedInContext';
+
+function Register({ setCurrentPath, path, createUser }) {
 
 	React.useEffect(() => {
-		setCurrentPath(currentPath);
-	}, [setCurrentPath, currentPath])
+		setCurrentPath(path);
+	}, [setCurrentPath, path])
 
+	const isLoggedIn = React.useContext(IsLoggedInContext);
 	const [isFormValid, setIsFormValid] = React.useState(false);
 
 	const name = useInput('', { isEmpty: true, minLength: 2 });
@@ -25,6 +30,10 @@ function Register({ setCurrentPath, currentPath }) {
 		}
 	}, [name.isInputValid, email.isInputValid, password.isInputValid]);
 
+	if (isLoggedIn) {
+		return <Navigate to="/movies" />
+	}
+
 	return (
 		<main className="register">
 
@@ -35,6 +44,8 @@ function Register({ setCurrentPath, currentPath }) {
 				linkText={'Войти'}
 				isFormValid={isFormValid}
 				redirectionPath={'/signin'}
+				onSubmit={createUser}
+				formValues={{ name: name.value, email: email.value, password: password.value }}
 			>
 
 				<fieldset className="form__fieldset">

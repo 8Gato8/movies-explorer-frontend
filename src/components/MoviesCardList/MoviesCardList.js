@@ -1,23 +1,26 @@
 import React from 'react';
-import MoviesCard from '../MoviesCard/MoviesCard';
 
 import './MoviesCardList.css';
 
-function MoviesCardList({ movies }) {
+function MoviesCardList({
+	movies,
+	children,
+	hasMoreButton,
+	handleMoreButtonClick
+}) {
+
+	const onMoreButtonClick = () => {
+		handleMoreButtonClick();
+	}
 
 	return (
 		<article className="app__movies-cards movies-cards">
-			<ul className="movies-cards__card-list">
-				{movies.map((movie, i) => (
 
-					<MoviesCard
-						movie={movie}
-						key={i}
-					/>
-				))}
+			<ul className="movies-cards__card-list">
+				{children}
 			</ul>
 
-			{movies.length >= 5 && <button type="button" className="movies-cards__more-button">Ещё</button>}
+			{hasMoreButton && movies.length > 3 && <button type="button" className="movies-cards__more-button" onClick={onMoreButtonClick}>Ещё</button>}
 		</article>
 	)
 }

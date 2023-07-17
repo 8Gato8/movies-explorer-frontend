@@ -1,0 +1,21 @@
+.api-message {
+	display: none;
+	margin: 0;
+}
+
+.api-message_visible {
+	display: block;
+}
+
+.api-message_style_form {
+	bottom: 65px;
+	font-size: 14px;
+}
+
+.api-message_status_error {
+	color: #EE3465;
+}
+
+.api-message_status_success {}
+
+.api-message_style_search-movies {}

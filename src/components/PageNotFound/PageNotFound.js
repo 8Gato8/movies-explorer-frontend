@@ -3,11 +3,11 @@ import { useNavigate } from 'react-router-dom';
 
 import './PageNotFound.css';
 
-function PageNotFound({ setCurrentPath, currentPath }) {
+function PageNotFound({ setCurrentPath, path }) {
 
 	React.useEffect(() => {
-		setCurrentPath(currentPath);
-	}, [setCurrentPath, currentPath])
+		setCurrentPath(path);
+	}, [setCurrentPath, path])
 
 	const navigate = useNavigate();
 
