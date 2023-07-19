@@ -4,9 +4,10 @@ import './MoviesCardList.css';
 
 function MoviesCardList({
 	movies,
-	children,
 	hasMoreButton,
-	handleMoreButtonClick
+	handleMoreButtonClick,
+	moviesLength,
+	children,
 }) {
 
 	const onMoreButtonClick = () => {
@@ -20,7 +21,7 @@ function MoviesCardList({
 				{children}
 			</ul>
 
-			{hasMoreButton && movies.length > 3 && <button type="button" className="movies-cards__more-button" onClick={onMoreButtonClick}>Ещё</button>}
+			{(hasMoreButton && (movies.length > 3 && movies.length > moviesLength)) && <button type="button" className="movies-cards__more-button" onClick={onMoreButtonClick}>Ещё</button>}
 		</article>
 	)
 }

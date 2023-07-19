@@ -1,31 +1,47 @@
 import React from 'react';
+
 import './EditProfileForm.css';
+
 import SubmitButton from '../SubmitButton/SubmitButton';
+import ApiMessage from '../ApiMessage/ApiMessage';
 
-import { regex } from '../../utils/constants/regexEmailValidation';
-import { useInput } from '../../utils/functions/validation';
+import { regexEmail, regexName } from '../../utils/constants/regexValidationVariables';
+import { useInput } from '../../utils/functions/useInput';
 
-function EditProfileForm({ toggleEditForm, editUserInfo }) {
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import { IsLoadingContext } from '../../contexts/IsLoadingContext';
 
+function EditProfileForm({
+	toggleEditForm,
+	editUserInfo,
+	isEditProfileApiMessageShown,
+	editProfileApiMessage,
+	editProfileApiMessageType
+}) {
+
+	const isLoading = React.useContext(IsLoadingContext);
+	const currentUser = React.useContext(CurrentUserContext);
 	const [isFormValid, setIsFormValid] = React.useState(false);
 
-	const name = useInput('', { isEmpty: true, minLength: 2 });
-	const email = useInput('', { isEmpty: true, minLength: 2, regex });
+	const name = useInput('', { isEmpty: true, minLength: 2, regexName });
+	const email = useInput('', { isEmpty: true, minLength: 2, regexEmail });
 
 	const onSubmit = (e) => {
 		e.preventDefault();
 		const formValues = { name: name.value, email: email.value };
 		editUserInfo(formValues);
-		toggleEditForm();
 	}
 
 	React.useEffect(() => {
-		if (name.isInputValid && email.isInputValid) {
+		if (
+			(name.isInputValid && email.isInputValid)
+			&& (name.value !== currentUser.name || email.value !== currentUser.email)
+		) {
 			setIsFormValid(true);
 		} else {
 			setIsFormValid(false);
 		}
-	}, [name.isInputValid, email.isInputValid]);
+	}, [name.isInputValid, email.isInputValid, currentUser.email, currentUser.name, name, email]);
 
 	return (
 		<>
@@ -40,6 +56,7 @@ function EditProfileForm({ toggleEditForm, editUserInfo }) {
 								: ''
 							}`}
 						id="input-name"
+						value={name.value}
 						placeholder="Имя"
 						type='text'
 						name="name"
@@ -59,6 +76,7 @@ function EditProfileForm({ toggleEditForm, editUserInfo }) {
 					>
 						{name.isMinLengthError && name.minLengthErrorMessage}
 						{name.isEmptyError && name.emptyErrorMessage}
+						{name.isNameValidationError && name.nameValidationMessage}
 					</span>
 
 				</label>
@@ -72,6 +90,7 @@ function EditProfileForm({ toggleEditForm, editUserInfo }) {
 								: ''
 							}`}
 						id="input-email"
+						value={email.value}
 						placeholder="E-mail"
 						type='text'
 						name="email"
@@ -98,7 +117,22 @@ function EditProfileForm({ toggleEditForm, editUserInfo }) {
 
 			</form >
 
-			<SubmitButton form="edit-profile-form" isFormValid={isFormValid} buttonText={'Сохранить'} additionalButtonStyles={'button-section'} />
+			<ApiMessage
+				additionalStyles={
+					`api-message_style_form 
+				${editProfileApiMessageType === 'error'
+						? 'api-message_theme_red'
+						: 'api-message_theme_green'
+					} `}
+				isApiMessageShown={isEditProfileApiMessageShown}
+				apiMessage={editProfileApiMessage}
+			/>
+
+			<div className="profile__buttons button-section">
+				<SubmitButton form="edit-profile-form" isFormValid={isFormValid && !isLoading} buttonText={'Сохранить'} additionalButtonStyles={'button-section'} />
+
+				<button className="edit-profile-form__redirection-link redirection-link" onClick={toggleEditForm}>Назад</button>
+			</div>
 		</>
 	)
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 import Form from '../Form/Form';
-import { regex } from '../../utils/constants/regexEmailValidation';
-import { useInput } from '../../utils/functions/validation';
+import { regexEmail } from '../../utils/constants/regexValidationVariables';
+import { useInput } from '../../utils/functions/useInput';
 
 import { Navigate } from 'react-router-dom';
 
@@ -9,16 +9,26 @@ import './Login.css';
 
 import { IsLoggedInContext } from '../../contexts/IsLoggedInContext';
 
-function Login({ setCurrentPath, path, setCurrentUser, login }) {
+function Login({
+	setCurrentPath,
+	setCurrentUser,
+	login,
+	isFormApiErrorShown,
+	formApiMessage
+}) {
+
+	const onPathChange = React.useCallback(() => {
+		setCurrentPath('/signin')
+	}, [setCurrentPath])
 
 	React.useEffect(() => {
-		setCurrentPath(path);
-	}, [setCurrentPath, path])
+		onPathChange();
+	}, [onPathChange])
 
 	const isLoggedIn = React.useContext(IsLoggedInContext);
 	const [isFormValid, setIsFormValid] = React.useState(false);
 
-	const email = useInput('', { isEmpty: true, minLength: 2, regex });
+	const email = useInput('', { isEmpty: true, minLength: 2, regexEmail });
 	const password = useInput('', { isEmpty: true, minLength: 2 });
 
 	React.useEffect(() => {
@@ -46,6 +56,8 @@ function Login({ setCurrentPath, path, setCurrentUser, login }) {
 				onSubmit={login}
 				formValues={{ email: email.value, password: password.value }}
 				setCurrentUser={setCurrentUser}
+				isFormApiErrorShown={isFormApiErrorShown}
+				formApiMessage={formApiMessage}
 			>
 
 				<fieldset className="form__fieldset">

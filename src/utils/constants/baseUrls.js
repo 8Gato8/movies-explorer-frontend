@@ -1,2 +1,2 @@
-export const baseUrlOwnApi = 'http://localhost:3001';
+export const baseUrlOwnApi = 'https://gato.diploma.nomoredomains.rocks';
 export const baseUrlBeatfilmApi = 'https://api.nomoreparties.co/beatfilm-movies';

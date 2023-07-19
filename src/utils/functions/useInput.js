@@ -13,6 +13,9 @@ const useValidation = (value, validations) => {
 	const [isEmailValidationError, setIsEmailValidationError] = React.useState(false);
 	const [emailValidationMessage, setEmailValidationMessage] = React.useState('');
 
+	const [isNameValidationError, setIsNameValidationError] = React.useState(false);
+	const [nameValidationMessage, setNameValidationMessage] = React.useState('');
+
 	React.useEffect(() => {
 		for (const validation in validations) {
 
@@ -38,16 +41,25 @@ const useValidation = (value, validations) => {
 					}
 					break;
 
-				case 'regex':
+				case 'regexEmail':
 					if (!validations[validation].test(String(value).toLowerCase())) {
 						setIsEmailValidationError(true);
-						setEmailValidationMessage('Ошибка валидации формы');
+						setEmailValidationMessage('Ошибка валидации email');
 					} else {
 						setIsEmailValidationError(false);
 						setEmailValidationMessage('');
 					}
 					break;
 
+				case 'regexName':
+					if (!validations[validation].test(String(value).toLowerCase())) {
+						setIsNameValidationError(true);
+						setNameValidationMessage('Ошибка валидации name');
+					} else {
+						setIsNameValidationError(false);
+						setNameValidationMessage('');
+					}
+					break;
 				default:
 					break;
 			}
@@ -55,17 +67,19 @@ const useValidation = (value, validations) => {
 	}, [value, validations])
 
 	React.useEffect(() => {
-		if (isEmptyError || isMinLengthError || isEmailValidationError) {
+		if (isEmptyError || isMinLengthError || isEmailValidationError || isNameValidationError) {
 			setIsInputValid(false);
 		} else {
 			setIsInputValid(true);
 		}
-	}, [isEmptyError, isMinLengthError, isEmailValidationError])
+	}, [isEmptyError, isMinLengthError, isEmailValidationError, isNameValidationError])
 
 	return {
 		isInputValid,
 		isEmptyError,
 		isMinLengthError,
+		isNameValidationError,
+		nameValidationMessage,
 		isEmailValidationError,
 		emptyErrorMessage,
 		minLengthErrorMessage,

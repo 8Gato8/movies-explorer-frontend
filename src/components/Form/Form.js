@@ -5,7 +5,9 @@ import Logo from "../Logo/Logo";
 import './Form.css';
 
 import SubmitButton from '../SubmitButton/SubmitButton';
-import ApiErrorMessage from '../ApiMessage/ApiMessage';
+import ApiMessage from '../ApiMessage/ApiMessage';
+
+import { IsLoadingContext } from '../../contexts/IsLoadingContext';
 
 function Form({
 	headingText,
@@ -17,8 +19,12 @@ function Form({
 	onSubmit,
 	formValues,
 	setCurrentUser,
+	isFormApiErrorShown,
+	formApiMessage,
 	children,
 }) {
+
+	const isLoading = React.useContext(IsLoadingContext);
 
 	const handleSubmit = async (e) => {
 
@@ -43,9 +49,9 @@ function Form({
 
 				{children}
 
-				<SubmitButton isFormValid={isFormValid} buttonText={buttonText} additionalButtonStyles={'form__submit-button'} />
+				<ApiMessage additionalStyles='api-message_style_form api-message_theme_red' isApiMessageShown={isFormApiErrorShown} apiMessage={formApiMessage} />
 
-				<ApiErrorMessage additionalStyles='api-error-message_style_form' />
+				<SubmitButton isFormValid={isFormValid && !isLoading} buttonText={buttonText} additionalButtonStyles={'form__submit-button'} />
 
 			</form>
 

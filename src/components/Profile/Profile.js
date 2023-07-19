@@ -4,7 +4,13 @@ import EditProfileForm from '../EditProfileForm/EditProfileForm';
 
 import './Profile.css';
 
-function Profile({ editUserInfo, logout }) {
+function Profile({
+	editUserInfo,
+	logout,
+	isEditProfileApiMessageShown,
+	editProfileApiMessage,
+	editProfileApiMessageType
+}) {
 
 	const currentUser = React.useContext(CurrentUserContext);
 	const [isEditFormOpen, setIsEditFormOpen] = React.useState(false);
@@ -20,7 +26,13 @@ function Profile({ editUserInfo, logout }) {
 
 				{isEditFormOpen
 					?
-					<EditProfileForm toggleEditForm={toggleEditForm} editUserInfo={editUserInfo} />
+					<EditProfileForm
+						toggleEditForm={toggleEditForm}
+						editUserInfo={editUserInfo}
+						isEditProfileApiMessageShown={isEditProfileApiMessageShown}
+						editProfileApiMessage={editProfileApiMessage}
+						editProfileApiMessageType={editProfileApiMessageType}
+					/>
 					:
 					<>
 						<div className="profile__data">

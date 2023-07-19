@@ -1,7 +1,7 @@
 import React from 'react';
 import Form from '../Form/Form';
-import { regex } from '../../utils/constants/regexEmailValidation';
-import { useInput } from '../../utils/functions/validation';
+import { regexEmail, regexName } from '../../utils/constants/regexValidationVariables';
+import { useInput } from '../../utils/functions/useInput';
 
 import { Navigate } from 'react-router-dom';
 
@@ -9,17 +9,26 @@ import './Register.css';
 
 import { IsLoggedInContext } from '../../contexts/IsLoggedInContext';
 
-function Register({ setCurrentPath, path, createUser }) {
+function Register({
+	setCurrentPath,
+	createUser,
+	isFormApiErrorShown,
+	formApiMessage,
+}) {
+
+	const onPathChange = React.useCallback(() => {
+		setCurrentPath('/signup')
+	}, [setCurrentPath])
 
 	React.useEffect(() => {
-		setCurrentPath(path);
-	}, [setCurrentPath, path])
+		onPathChange();
+	}, [onPathChange])
 
 	const isLoggedIn = React.useContext(IsLoggedInContext);
 	const [isFormValid, setIsFormValid] = React.useState(false);
 
-	const name = useInput('', { isEmpty: true, minLength: 2 });
-	const email = useInput('', { isEmpty: true, minLength: 2, regex });
+	const name = useInput('', { isEmpty: true, minLength: 2, regexName });
+	const email = useInput('', { isEmpty: true, minLength: 2, regexEmail });
 	const password = useInput('', { isEmpty: true, minLength: 2 });
 
 	React.useEffect(() => {
@@ -46,6 +55,8 @@ function Register({ setCurrentPath, path, createUser }) {
 				redirectionPath={'/signin'}
 				onSubmit={createUser}
 				formValues={{ name: name.value, email: email.value, password: password.value }}
+				isFormApiErrorShown={isFormApiErrorShown}
+				formApiMessage={formApiMessage}
 			>
 
 				<fieldset className="form__fieldset">
@@ -78,6 +89,7 @@ function Register({ setCurrentPath, path, createUser }) {
 						>
 							{name.isMinLengthError && name.minLengthErrorMessage}
 							{name.isEmptyError && name.emptyErrorMessage}
+							{name.isNameValidationError && name.nameValidationMessage}
 						</span>
 
 					</label>

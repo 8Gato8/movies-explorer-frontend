@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 
 import './App.css';
 
@@ -19,8 +19,6 @@ import Register from '../Register/Register';
 import Login from '../Login/Login';
 import Profile from '../Profile/Profile';
 
-import Preloader from '../Preloader/Preloader';
-
 import PageNotFound from '../PageNotFound/PageNotFound';
 
 /* api */
@@ -31,20 +29,25 @@ import * as bestFilmsApi from '../../utils/api/MoviesApi';
 /* contexts */
 
 import { useMediaQuery } from '../../utils/functions/useMediaQuery';
-
-/* functions */
-
 import { IsLoggedInContext } from '../../contexts/IsLoggedInContext';
 import { CurrentPathContext } from '../../contexts/CurrentPathContext';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-import { ApiMessageContext } from '../../contexts/ApiMessageContext';
-import { IsApiMessageShownContext } from '../../contexts/IsApiMessageShownContext';
+import { IsLoadingContext } from '../../contexts/IsLoadingContext';
+
+/* functions */
 
 import { findMovieById } from '../../utils/functions/findMovieById';
 
 import { searchMovies } from '../../utils/functions/searchMovies';
 
+/* constants */
+
 function App() {
+
+  const navigate = useNavigate();
+
+  const [isLoggedIn, setIsLoggedIn] = React.useState(localStorage.getItem("token"));
+  const [currentUser, setCurrentUser] = React.useState({});
 
   const isDisplayLarge = useMediaQuery("(min-width: 1140px)");
 
@@ -52,25 +55,51 @@ function App() {
 
   const isDisplaySmall = useMediaQuery("(max-width: 480px)");
 
-  const [token, setToken] = React.useState(localStorage.getItem('token'));
-
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const [token, setToken] = React.useState(localStorage.getItem("token"));
 
   const [isLoading, setIsLoading] = React.useState(false);
 
   const [currentPath, setCurrentPath] = React.useState('');
-  const [currentUser, setCurrentUser] = React.useState({ name: '', email: '', password: '' });
 
-  const storedMovies = JSON.parse(localStorage.getItem("storedMovies")).movies;
-
-  const [movies, setMovies] = React.useState(storedMovies);
-  const [savedMovies, setSavedMovies] = React.useState([]);
+  const storedMovies = JSON.parse(localStorage.getItem("storedMovies"));
 
   const [initialMoviesArray, setInitialMoviesArray] = React.useState([]);
   const [initialSavedMoviesArray, setInitialSavedMoviesArray] = React.useState([]);
 
-  const [isApiErrorShown, setIsApiErrorMessageShown] = React.useState(false);
-  const [apiMessage, setApiMessage] = React.useState('');
+  const [movies, setMovies] = React.useState(storedMovies ? storedMovies.movies : []);
+  const [savedMovies, setSavedMovies] = React.useState([]);
+
+  const [isLoginApiErrorShown, setIsLoginApiErrorShown] = React.useState(false);
+  const [loginApiErrorMessage, setLoginApiErrorMessage] = React.useState('');
+
+  const [isRegisterApiErrorShown, setIsRegisterApiErrorShown] = React.useState(false);
+  const [registerApiErrorMessage, setRegisterApiErrorMessage] = React.useState('');
+
+  const [isEditProfileApiMessageShown, setIsEditProfileApiMessageShown] = React.useState(false);
+  const [editProfileApiMessage, setEditProfileApiMessage] = React.useState('');
+  const [editProfileApiMessageType, setEditProfileApiMessageType] = React.useState('error');
+
+  const [isMoviesApiErrorShown, setIsMoviesApiErrorShown] = React.useState(false);
+  const [moviesApiMessage, setMoviesApiMessage] = React.useState('');
+
+  const [isSavedMoviesApiErrorShown, setIsSavedMoviesApiErrorShown] = React.useState(false);
+  const [savedMoviesApiMessage, setSavedMoviesApiMessage] = React.useState('');
+
+  const getUser = React.useCallback(async (token) => {
+
+    try {
+
+      const user = token ? await api.getUserInfo(token) : null;
+
+      if (user) {
+        setCurrentUser(user)
+        setIsLoggedIn(true);
+      }
+
+    } catch (err) {
+      console.log(err);
+    }
+  }, [])
 
   const calculateRequiredLength = React.useCallback(() => {
     let initialMoviesLength;
@@ -104,106 +133,90 @@ function App() {
   }, [calculateRequiredLength])
 
   const login = React.useCallback(async ({ email, password }) => {
-    try {
 
-      /* setIsLoading(true); */
+    try {
+      setIsLoading(true);
+      setIsLoginApiErrorShown(false);
 
       const data = await api.login(email, password);
 
-      if (!data) {
-        throw new Error('При попытке входа в систему произошла ошибка');
-      }
-
       if (data.token) {
-        localStorage.setItem('token', data.token);
+
+        localStorage.setItem("token", data.token);
         setToken(data.token);
         setIsLoggedIn(true);
       }
 
     } catch (err) {
+      setLoginApiErrorMessage('При попытке входа в систему произошла ошибка');
+      setIsLoginApiErrorShown(true);
       console.log(err);
-      setApiMessage(err.message);
-      setIsApiErrorMessageShown(true);
-    }
-    /* finally {
+    } finally {
       setIsLoading(false);
-    } */
+    }
   }, [])
 
   const createUser = React.useCallback(async ({ name, email, password }) => {
 
     try {
+      setIsLoading(true);
 
-      /* setIsLoading(true); */
+      setIsRegisterApiErrorShown(false);
 
-      const data = await api.createUser(name, email, password);
-
+      await api.createUser(name, email, password);
       await login({ email, password });
 
-      if (!data) {
-        throw new Error('При попытке регистрации произошла ошибка');
-      }
+      setIsLoggedIn(true);
 
     } catch (err) {
+      setRegisterApiErrorMessage('При попытке регистрации произошла ошибка');
+      setIsRegisterApiErrorShown(true);
+
       console.log(err);
-      setApiMessage(err.message);
-      setIsApiErrorMessageShown(true);
     }
-    /* finally {
+    finally {
       setIsLoading(false);
-    } */
+    }
 
   }, [login])
 
   const editUserInfo = React.useCallback(async ({ email, name }) => {
 
     try {
-
-      /* setIsLoading(true); */
+      setIsLoading(true);
 
       const newUserInfo = await api.editUserInfo(email, name, token);
 
-      setApiMessage('Данные профиля успешно изменены');
-      setIsApiErrorMessageShown(true);
+      setEditProfileApiMessageType('success')
+      setIsEditProfileApiMessageShown(true);
 
+      setEditProfileApiMessage('Данные профиля успешно обновлены');
       setCurrentUser(newUserInfo);
 
-
     } catch (err) {
+      setEditProfileApiMessageType('error')
+      setIsEditProfileApiMessageShown(true);
+      setEditProfileApiMessage('При обновлении профиля произошла ошибка');
+
       console.log(err);
-      setApiMessage('При обновлении профиля произошла ошибка');
-      setIsApiErrorMessageShown(true);
-
-    } /* finally {
+    } finally {
       setIsLoading(false);
-    } */
-  }, [token])
-
-  const checkIfTokenExists = React.useCallback(async (token) => {
-
-    try {
-      /* setIsLoading(true); */
-      const user = token ? await api.getUserInfo(token) : null;
-
-      if (user) {
-        setIsLoggedIn(true);
-        setCurrentUser(user);
-      }
-
-    } catch (err) {
-      console.log(err);
-    } /* finally {
-      setIsLoading(false);
-    } */
-  }, [])
+    }
+  }, [token, setIsEditProfileApiMessageShown])
 
   const logout = React.useCallback(() => {
 
     setIsLoggedIn(false);
     setCurrentUser({ name: '', email: '', password: '' });
-    localStorage.removeItem('token');
-    setToken(localStorage.getItem('token'));
-  }, [])
+
+    localStorage.removeItem("token");
+    localStorage.removeItem("storedMovies");
+
+    setMovies([]);
+
+    navigate('/');
+
+  }, [navigate])
 
   const handleCardLikeClick = React.useCallback(async (movie, isLiked) => {
 
@@ -212,24 +225,33 @@ function App() {
       let newMovie;
 
       if (isLiked) {
-        const newMovieId = findMovieById(movie, savedMovies)._id;
+
+        const newMovieId = findMovieById(movie, initialSavedMoviesArray)._id;
         newMovie = await api.deleteMovie(newMovieId, token);
+
+        setInitialSavedMoviesArray((state) => {
+          return state.filter((m) => m._id !== newMovie._id)
+        });
+
         setSavedMovies((state) => {
           return state.filter((m) => m._id !== newMovie._id)
         });
+
       } else {
         newMovie = await api.addMovie(movie, token);
+        setInitialSavedMoviesArray([...initialSavedMoviesArray, newMovie]);
         setSavedMovies([...savedMovies, newMovie]);
       }
 
     } catch (err) {
       console.log(err);
     }
-  }, [token, savedMovies])
+  }, [token, savedMovies, initialSavedMoviesArray])
 
   const handleCardDeleteClick = React.useCallback(async (movie) => {
 
     try {
+
       const newMovie = await api.deleteMovie(movie._id, token);
 
       setSavedMovies((state) => {
@@ -254,163 +276,203 @@ function App() {
 
   const getInitialMovies = React.useCallback(async () => {
 
+    if (isLoggedIn) {
+
+      try {
+
+        const initialMovies = await bestFilmsApi.getBetFilmApiInfo();
+        setInitialMoviesArray(initialMovies);
+
+      } catch (err) {
+        setMoviesApiMessage('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз');
+        setIsMoviesApiErrorShown(true);
+        console.log(err);
+      }
+    }
+
+  }, [isLoggedIn])
+
+  const getSearchedMovies = React.useCallback(async (initialMovies, movieInput, isChecked) => {
+
     try {
 
-      const initialMovies = await bestFilmsApi.getBetFilmApiInfo();
-      setInitialMoviesArray(initialMovies);
+      setIsLoading(true);
+
+      const newMovies = searchMovies(initialMovies, movieInput, isChecked);
+      setMovies(newMovies);
+
+      if (newMovies.length === 0) {
+
+        setMoviesApiMessage('Ничего не найдено');
+        setIsMoviesApiErrorShown(true);
+      } else {
+        setIsMoviesApiErrorShown(false);
+
+        const storedMoviesData = {
+          movies: newMovies,
+          movieInput,
+          isChecked
+        }
+
+        localStorage.setItem('storedMovies', JSON.stringify(storedMoviesData));
+      }
 
     } catch (err) {
+      setMoviesApiMessage('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз');
+      setIsMoviesApiErrorShown(true);
       console.log(err);
+
+    } finally {
+      setIsLoading(false);
     }
   }, [])
 
   const getInitialSavedMovies = React.useCallback(async () => {
 
-    try {
+    if (isLoggedIn) {
 
-      const initialSavedMovies = await api.getSavedMovies(token);
-      setInitialSavedMoviesArray(initialSavedMovies);
-      setSavedMovies(initialSavedMovies);
+      try {
 
-    } catch (err) {
-      console.log(err);
-    }
-  }, [token])
+        const initialSavedMovies = await api.getSavedMovies(token);
+        setInitialSavedMoviesArray(initialSavedMovies);
+        setSavedMovies(initialSavedMovies);
 
-  const getSearchedMovies = React.useCallback((moviesArray, movieInput, isChecked) => {
-
-    try {
-      const newMovies = searchMovies(moviesArray, movieInput, isChecked);
-      setMovies(newMovies);
-
-      const storedMoviesData = {
-        movies: newMovies,
-        movieInput,
-        isChecked
+      } catch (err) {
+        setSavedMoviesApiMessage('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз');
+        setIsSavedMoviesApiErrorShown(true);
+        console.log(err);
       }
-
-      localStorage.setItem('storedMovies', JSON.stringify(storedMoviesData));
-
-    } catch (err) {
-      setApiMessage(err.message);
-      setIsApiErrorMessageShown(true);
-      console.log(err);
     }
-  }, [])
 
-  const getSearchedSavedMovies = React.useCallback((moviesArray, movieInput, isChecked) => {
+  }, [token, isLoggedIn])
+
+  const getSearchedSavedMovies = React.useCallback((initialMovies, movieInput, isChecked) => {
 
     try {
 
-      const newSavedMovies = searchMovies(moviesArray, movieInput, isChecked);
+      setIsLoading(true);
+
+      const newSavedMovies = searchMovies(initialMovies, movieInput, isChecked);
       setSavedMovies(newSavedMovies);
 
+      if (newSavedMovies.length === 0) {
+        setSavedMoviesApiMessage('Ничего не найдено');
+        setIsSavedMoviesApiErrorShown(true);
+      } else {
+        setIsSavedMoviesApiErrorShown(false);
+      }
+
     } catch (err) {
+      setSavedMoviesApiMessage('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз');
+      setIsSavedMoviesApiErrorShown(true);
       console.log(err);
+    } finally {
+      setIsLoading(false);
     }
   }, [])
 
   React.useEffect(() => {
-    checkIfTokenExists(token);
-  }, [token, checkIfTokenExists])
+    getUser(token)
+  }, [getUser, token])
 
   React.useEffect(() => {
-    getInitialMovies()
     getInitialSavedMovies();
+    getInitialMovies();
     setCalculatedLength();
-  }, [getInitialMovies, getInitialSavedMovies, setCalculatedLength])
-
-  if (isLoading) {
-    return (
-      <Preloader />
-    )
-  }
+  }, [getInitialSavedMovies, setCalculatedLength, getInitialMovies])
 
   return (
     <div className='app'>
-      <CurrentUserContext.Provider value={currentUser}>
-        <CurrentPathContext.Provider value={currentPath}>
-          <IsLoggedInContext.Provider value={isLoggedIn}>
-            <IsApiMessageShownContext.Provider value={isApiErrorShown}>
-              <ApiMessageContext.Provider value={apiMessage}>
+      <IsLoadingContext.Provider value={isLoading}>
+        <CurrentUserContext.Provider value={currentUser}>
+          <CurrentPathContext.Provider value={currentPath}>
+            <IsLoggedInContext.Provider value={isLoggedIn}>
 
-                <Header />
+              <Header />
 
-                <Routes>
+              <Routes>
 
-                  <Route path="/movies"
-                    element={
-                      <ProtectedRoute
-                        element={Movies}
-                        movies={movies}
-                        savedMovies={savedMovies}
-                        handleCardLikeClick={handleCardLikeClick}
-                        getSearchedMovies={getSearchedMovies}
-                        initialMoviesArray={initialMoviesArray}
-                        moviesLength={moviesLength}
-                        handleMoreButtonClick={handleMoreButtonClick}
-                      />
-                    }
-                  />
+                <Route path="/movies"
+                  element={
+                    <ProtectedRoute
+                      element={Movies}
+                      setCurrentPath={setCurrentPath}
+                      movies={movies}
+                      initialMovies={initialMoviesArray}
+                      savedMovies={initialSavedMoviesArray}
+                      handleCardLikeClick={handleCardLikeClick}
+                      getSearchedMovies={getSearchedMovies}
+                      moviesLength={moviesLength}
+                      handleMoreButtonClick={handleMoreButtonClick}
+                      isMoviesApiErrorShown={isMoviesApiErrorShown}
+                      moviesApiMessage={moviesApiMessage}
+                      storedMovies={storedMovies}
+                    />
+                  }
+                />
 
-                  <Route path="/saved-movies"
-                    element={
-                      <ProtectedRoute
-                        element={SavedMovies}
-                        movies={savedMovies}
-                        savedMovies={savedMovies}
-                        handleCardDeleteClick={handleCardDeleteClick}
-                        getSearchedMovies={getSearchedSavedMovies}
-                        initialSavedMoviesArray={initialSavedMoviesArray}
-                        moviesLength={moviesLength}
+                <Route path="/saved-movies"
+                  element={
+                    <ProtectedRoute
+                      element={SavedMovies}
+                      setCurrentPath={setCurrentPath}
+                      movies={savedMovies}
+                      savedMovies={initialSavedMoviesArray}
+                      handleCardDeleteClick={handleCardDeleteClick}
+                      getSearchedMovies={getSearchedSavedMovies}
+                      moviesLength={moviesLength}
+                      isMoviesApiErrorShown={isSavedMoviesApiErrorShown}
+                      moviesApiMessage={savedMoviesApiMessage}
+                    />
+                  }
+                />
 
-                        handleMoreButtonClick={handleMoreButtonClick}
-                      />
-                    }
-                  />
+                <Route path="/profile"
+                  element={
+                    <ProtectedRoute
+                      element={Profile}
+                      editUserInfo={editUserInfo}
+                      logout={logout}
+                      isEditProfileApiMessageShown={isEditProfileApiMessageShown}
+                      editProfileApiMessage={editProfileApiMessage}
+                      editProfileApiMessageType={editProfileApiMessageType}
+                    />
+                  }
+                />
 
-                  <Route path="/profile"
-                    element={
-                      <ProtectedRoute
-                        element={Profile}
-                        editUserInfo={editUserInfo}
-                        logout={logout}
-                      />
-                    }
-                  />
+                <Route path="/" element={<Main setCurrentPath={setCurrentPath} />} />
 
-                  <Route path="/" element={<Main />} />
+                <Route
+                  path="/signup"
+                  element={
+                    <Register
+                      setCurrentPath={setCurrentPath}
+                      createUser={createUser}
+                      isFormApiErrorShown={isRegisterApiErrorShown}
+                      formApiMessage={registerApiErrorMessage}
+                    />} />
 
-                  <Route
-                    path="/signup"
-                    element={
-                      <Register
-                        setCurrentPath={setCurrentPath}
-                        path={'/signup'}
-                        createUser={createUser}
-                      />} />
+                <Route
+                  path="/signin"
+                  element={
+                    <Login
+                      setCurrentPath={setCurrentPath}
+                      setCurrentUser={setCurrentUser}
+                      login={login}
+                      isFormApiErrorShown={isLoginApiErrorShown}
+                      formApiMessage={loginApiErrorMessage}
+                    />} />
 
-                  <Route
-                    path="/signin"
-                    element={
-                      <Login
-                        setCurrentPath={setCurrentPath}
-                        path={'/signin'}
-                        setCurrentUser={setCurrentUser}
-                        login={login}
-                      />} />
+                <Route path="*" element={<PageNotFound setCurrentPath={setCurrentPath} path={'*'} />} />
 
-                  <Route path="*" element={<PageNotFound setCurrentPath={setCurrentPath} path={'*'} />} />
+              </Routes>
 
-                </Routes>
+              <Footer />
 
-                <Footer />
-
-              </ApiMessageContext.Provider>
-            </IsApiMessageShownContext.Provider>
-          </IsLoggedInContext.Provider >
-        </CurrentPathContext.Provider>
-      </CurrentUserContext.Provider>
+            </IsLoggedInContext.Provider >
+          </CurrentPathContext.Provider>
+        </CurrentUserContext.Provider>
+      </IsLoadingContext.Provider >
     </div >
   );
 }

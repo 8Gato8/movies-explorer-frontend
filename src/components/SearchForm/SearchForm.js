@@ -1,21 +1,22 @@
 import React from 'react';
-import ApiErrorMessage from '../ApiMessage/ApiMessage';
+import ApiMessage from '../ApiMessage/ApiMessage';
 
 import './SearchForm.css';
 
-function SearchForm({ getSearchedMovies, moviesArray, shouldUseStoredData }) {
+function SearchForm({
+	getSearchedMovies,
+	storedMovies,
+	initialMovies
+}) {
 
-	const initialInputValue = shouldUseStoredData
-		? JSON.parse(localStorage.getItem("storedMovies")).movieInput
-		: '';
+	const [isBlankInputErrorShown, setIsBlankInputErrorShown] = React.useState(false);
+	const [blankInputErrorMessage, setBlankInputErrorMessage] = React.useState('');
 
-	const initialCheckboxValue = shouldUseStoredData
-		? JSON.parse(localStorage.getItem("storedMovies")).isChecked
-		: false;
+	const initialMovieInput = storedMovies ? storedMovies.movieInput : '';
+	const initialCheckboxInput = storedMovies ? storedMovies.isChecked : false;
 
-	const [movie, setMovie] = React.useState(initialInputValue);
-	const [checkbox, setCheckbox] = React.useState(initialCheckboxValue);
-
+	const [movie, setMovie] = React.useState(initialMovieInput);
+	const [checkbox, setCheckbox] = React.useState(initialCheckboxInput);
 
 	const onMovieChange = (e) => {
 		setMovie(e.target.value);
@@ -23,14 +24,27 @@ function SearchForm({ getSearchedMovies, moviesArray, shouldUseStoredData }) {
 
 	const onCheckboxChange = (e) => {
 		setCheckbox(e.target.checked);
+
+		if (initialMovies.length > 1) {
+			if (movie.length < 1) {
+				setBlankInputErrorMessage('Нужно ввести ключевое слово');
+				setIsBlankInputErrorShown(true);
+			} else {
+				setIsBlankInputErrorShown(false);
+				getSearchedMovies(initialMovies, movie, !checkbox);
+			}
+		}
 	}
 
 	const onSubmit = (e) => {
 		e.preventDefault();
-		if (e.target.elements.movie.value.length >= 1) {
-			getSearchedMovies(moviesArray, movie, checkbox);
+
+		if (movie.length < 1) {
+			setBlankInputErrorMessage('Нужно ввести ключевое слово');
+			setIsBlankInputErrorShown(true);
 		} else {
-			throw new Error('Нужно ввести ключевое слово');
+			setIsBlankInputErrorShown(false);
+			getSearchedMovies(initialMovies, movie, checkbox);
 		}
 	}
 
@@ -44,7 +58,7 @@ function SearchForm({ getSearchedMovies, moviesArray, shouldUseStoredData }) {
 						<div className="search__form-search-input-container">
 
 							<div className="search__form-search-icon"></div>
-							<ApiErrorMessage additionalStyles=''></ApiErrorMessage>
+
 							<input
 								id="movie"
 								type="text"
@@ -67,6 +81,9 @@ function SearchForm({ getSearchedMovies, moviesArray, shouldUseStoredData }) {
 						<span className="search__form-checkbox-lebel-text">Короткометражки</span>
 					</label>
 				</form>
+
+				<ApiMessage additionalStyles='api-message_style_blank-input-error api-message_theme_red' isApiMessageShown={isBlankInputErrorShown} apiMessage={blankInputErrorMessage} />
+
 			</div>
 		</article>
 	)

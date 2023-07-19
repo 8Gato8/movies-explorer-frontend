@@ -13,7 +13,7 @@ function MoviesCard({
 	handleCardDeleteClick
 }) {
 
-	const [isLiked, setIsLiked] = React.useState(isMovieAlreadySaved(movie, savedMovies));
+	const [isLiked, setIsLiked] = React.useState(false);
 
 	const onLike = () => {
 		handleCardLikeClick(movie, isLiked);
@@ -23,6 +23,10 @@ function MoviesCard({
 	const onDelete = () => {
 		handleCardDeleteClick(movie);
 	}
+
+	React.useEffect(() => {
+		setIsLiked(isMovieAlreadySaved(movie, savedMovies))
+	}, [movie, savedMovies])
 
 	return (
 		<li className="movies-cards__card-list-item movie-card">
