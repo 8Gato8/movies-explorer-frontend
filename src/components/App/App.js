@@ -63,7 +63,6 @@ function App() {
 
   const storedMovies = JSON.parse(localStorage.getItem("storedMovies"));
 
-  const [initialMoviesArray, setInitialMoviesArray] = React.useState([]);
   const [initialSavedMoviesArray, setInitialSavedMoviesArray] = React.useState([]);
 
   const [movies, setMovies] = React.useState(storedMovies ? storedMovies.movies : []);
@@ -274,33 +273,17 @@ function App() {
     }
   }, [additionalMoviesLength, moviesLength])
 
-  const getInitialMovies = React.useCallback(async () => {
-
-    if (isLoggedIn) {
-
-      try {
-
-        const initialMovies = await bestFilmsApi.getBetFilmApiInfo();
-        setInitialMoviesArray(initialMovies);
-
-      } catch (err) {
-        setMoviesApiMessage('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз');
-        setIsMoviesApiErrorShown(true);
-        console.log(err);
-      }
-    }
-
-  }, [isLoggedIn])
-
-  const getSearchedMovies = React.useCallback(async (initialMovies, movieInput, isChecked) => {
+  const getSearchedMovies = React.useCallback(async (movieInput, isChecked) => {
 
     try {
 
       setIsLoading(true);
 
-      const newMovies = searchMovies(initialMovies, movieInput, isChecked);
-      setMovies(newMovies);
+      const initialMovies = await bestFilmsApi.getBetFilmApiInfo();
 
+      const newMovies = searchMovies(initialMovies, movieInput, isChecked);
+
+      setMovies(newMovies);
       if (newMovies.length === 0) {
 
         setMoviesApiMessage('Ничего не найдено');
@@ -313,7 +296,6 @@ function App() {
           movieInput,
           isChecked
         }
-
         localStorage.setItem('storedMovies', JSON.stringify(storedMoviesData));
       }
 
@@ -334,7 +316,9 @@ function App() {
       try {
 
         const initialSavedMovies = await api.getSavedMovies(token);
+
         setInitialSavedMoviesArray(initialSavedMovies);
+
         setSavedMovies(initialSavedMovies);
 
       } catch (err) {
@@ -346,13 +330,13 @@ function App() {
 
   }, [token, isLoggedIn])
 
-  const getSearchedSavedMovies = React.useCallback((initialMovies, movieInput, isChecked) => {
+  const getSearchedSavedMovies = React.useCallback((movieInput, isChecked) => {
 
     try {
 
       setIsLoading(true);
 
-      const newSavedMovies = searchMovies(initialMovies, movieInput, isChecked);
+      const newSavedMovies = searchMovies(initialSavedMoviesArray, movieInput, isChecked);
       setSavedMovies(newSavedMovies);
 
       if (newSavedMovies.length === 0) {
@@ -369,7 +353,7 @@ function App() {
     } finally {
       setIsLoading(false);
     }
-  }, [])
+  }, [initialSavedMoviesArray])
 
   React.useEffect(() => {
     getUser(token)
@@ -377,9 +361,8 @@ function App() {
 
   React.useEffect(() => {
     getInitialSavedMovies();
-    getInitialMovies();
     setCalculatedLength();
-  }, [getInitialSavedMovies, setCalculatedLength, getInitialMovies])
+  }, [getInitialSavedMovies, setCalculatedLength])
 
   return (
     <div className='app'>
@@ -398,7 +381,6 @@ function App() {
                       element={Movies}
                       setCurrentPath={setCurrentPath}
                       movies={movies}
-                      initialMovies={initialMoviesArray}
                       savedMovies={initialSavedMoviesArray}
                       handleCardLikeClick={handleCardLikeClick}
                       getSearchedMovies={getSearchedMovies}

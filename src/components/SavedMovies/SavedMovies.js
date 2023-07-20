@@ -39,7 +39,6 @@ function SavedMovies({
 
 			<SearchForm
 				getSearchedMovies={getSearchedMovies}
-				initialMovies={savedMovies}
 			/>
 
 			{

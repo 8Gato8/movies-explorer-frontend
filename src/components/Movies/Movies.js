@@ -13,7 +13,6 @@ import { sortMovies } from '../../utils/functions/sortMovies';
 
 function Movies({
 	movies,
-	initialMovies,
 	setCurrentPath,
 	savedMovies,
 	handleCardLikeClick,
@@ -43,7 +42,6 @@ function Movies({
 			<SearchForm
 				getSearchedMovies={getSearchedMovies}
 				storedMovies={storedMovies}
-				initialMovies={initialMovies}
 			/>
 
 			{

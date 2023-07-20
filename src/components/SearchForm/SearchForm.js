@@ -6,7 +6,6 @@ import './SearchForm.css';
 function SearchForm({
 	getSearchedMovies,
 	storedMovies,
-	initialMovies
 }) {
 
 	const [isBlankInputErrorShown, setIsBlankInputErrorShown] = React.useState(false);
@@ -25,14 +24,12 @@ function SearchForm({
 	const onCheckboxChange = (e) => {
 		setCheckbox(e.target.checked);
 
-		if (initialMovies.length > 1) {
-			if (movie.length < 1) {
-				setBlankInputErrorMessage('Нужно ввести ключевое слово');
-				setIsBlankInputErrorShown(true);
-			} else {
-				setIsBlankInputErrorShown(false);
-				getSearchedMovies(initialMovies, movie, !checkbox);
-			}
+		if (movie.length < 1) {
+			setBlankInputErrorMessage('Нужно ввести ключевое слово');
+			setIsBlankInputErrorShown(true);
+		} else {
+			setIsBlankInputErrorShown(false);
+			getSearchedMovies(movie, !checkbox);
 		}
 	}
 
@@ -44,7 +41,7 @@ function SearchForm({
 			setIsBlankInputErrorShown(true);
 		} else {
 			setIsBlankInputErrorShown(false);
-			getSearchedMovies(initialMovies, movie, checkbox);
+			getSearchedMovies(movie, checkbox);
 		}
 	}
 
