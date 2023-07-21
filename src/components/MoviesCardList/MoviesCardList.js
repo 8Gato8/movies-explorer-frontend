@@ -2,6 +2,8 @@ import React from 'react';
 
 import './MoviesCardList.css';
 
+import { REQUIRED_NUMBER_FOR_MORE_BUTTON } from '../../utils/constants/requiredNumberForMoreButton';
+
 function MoviesCardList({
 	movies,
 	hasMoreButton,
@@ -21,7 +23,7 @@ function MoviesCardList({
 				{children}
 			</ul>
 
-			{(hasMoreButton && (movies.length > 3 && movies.length > moviesLength)) && <button type="button" className="movies-cards__more-button" onClick={onMoreButtonClick}>Ещё</button>}
+			{hasMoreButton && ((movies.length > REQUIRED_NUMBER_FOR_MORE_BUTTON) && (movies.length > moviesLength)) && <button type="button" className="movies-cards__more-button" onClick={onMoreButtonClick}>Ещё</button>}
 		</article>
 	)
 }

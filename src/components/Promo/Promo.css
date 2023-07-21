@@ -40,26 +40,27 @@
 .promo__nav-button {
 	align-self: center;
 	background-color: transparent;
-	min-height: 36px;
-	padding: 0 19px;
+	padding: 0;
 	border-radius: 3px;
 	border: 1px solid #fff;
 	grid-area: link;
 	max-width: 130px;
-	cursor: pointer;
-	transition: opacity .2s linear;
-}
-
-.promo__nav-button:hover {
-	opacity: .6;
 }
 
 .promo__link {
+	display: block;
+	min-height: 36px;
+	padding: 10px 0;
 	text-decoration: none;
 	color: #fff;
 	font-size: 12px;
 	font-weight: 500;
 	line-height: 1.33;
+	transition: opacity .2s linear;
+}
+
+.promo__link:hover {
+	opacity: .6;
 }
 
 .promo__nowrap-second-line {

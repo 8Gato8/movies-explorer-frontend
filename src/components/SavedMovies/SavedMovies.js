@@ -8,7 +8,6 @@ import ApiMessage from '../ApiMessage/ApiMessage';
 import './SavedMovies.css';
 
 import { IsLoadingContext } from '../../contexts/IsLoadingContext';
-
 import { sortMovies } from '../../utils/functions/sortMovies';
 
 function SavedMovies({
@@ -27,7 +26,7 @@ function SavedMovies({
 	const sortedMovies = sortMovies(movies, moviesLength);
 
 	const onPathChange = React.useCallback(() => {
-		setCurrentPath('/saved-movies')
+		setCurrentPath('/saved-movies');
 	}, [setCurrentPath])
 
 	React.useEffect(() => {
@@ -48,7 +47,11 @@ function SavedMovies({
 					:
 					(isMoviesApiErrorShown)
 						?
-						<ApiMessage additionalStyles='api-message_style_no-movies-found' isApiMessageShown={isMoviesApiErrorShown} apiMessage={moviesApiMessage} />
+						<ApiMessage
+							additionalStyles='api-message_style_no-movies-found'
+							isApiMessageShown={isMoviesApiErrorShown}
+							apiMessage={moviesApiMessage}
+						/>
 						:
 						<MoviesCardList
 							movies={movies}

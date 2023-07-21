@@ -21,7 +21,7 @@ function SearchForm({
 		setMovie(e.target.value);
 	}
 
-	const onCheckboxChange = (e) => {
+	const onCheckboxChange = async (e) => {
 		setCheckbox(e.target.checked);
 
 		if (movie.length < 1) {

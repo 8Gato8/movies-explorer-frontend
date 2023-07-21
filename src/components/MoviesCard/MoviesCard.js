@@ -16,8 +16,7 @@ function MoviesCard({
 	const [isLiked, setIsLiked] = React.useState(false);
 
 	const onLike = () => {
-		handleCardLikeClick(movie, isLiked);
-		setIsLiked(!isLiked);
+		handleCardLikeClick(movie, isLiked, setIsLiked);
 	}
 
 	const onDelete = () => {

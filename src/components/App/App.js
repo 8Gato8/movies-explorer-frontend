@@ -37,10 +37,24 @@ import { IsLoadingContext } from '../../contexts/IsLoadingContext';
 /* functions */
 
 import { findMovieById } from '../../utils/functions/findMovieById';
-
 import { searchMovies } from '../../utils/functions/searchMovies';
 
 /* constants */
+
+import {
+  LARGE_DISPLAY_LENGTH,
+  LARGE_DISPLAY_ADDITIONAL_LENGTH,
+  MEDIUM_DISPLAY_LENGTH,
+  MEDIUM_DISPLAY_ADDITIONAL_LENGTH,
+  SMALL_DISPLAY_LENGTH,
+  SMALL_DISPLAY_ADDITIONAL_LENGTH
+} from '../../utils/constants/requiredLengthNumbers';
+
+import {
+  LARGE_DISPLAY_REQUIREMENT,
+  MEDIUM_DISPLAY_REQUIREMENT,
+  SMALL_DISPLAY_REQUIREMENT
+} from '../../utils/constants/displayWidthProps';
 
 function App() {
 
@@ -49,11 +63,11 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(localStorage.getItem("token"));
   const [currentUser, setCurrentUser] = React.useState({});
 
-  const isDisplayLarge = useMediaQuery("(min-width: 1140px)");
+  const isDisplayLarge = useMediaQuery(LARGE_DISPLAY_REQUIREMENT);
 
-  const isDisplayMedium = useMediaQuery("(max-width: 1140px)");
+  const isDisplayMedium = useMediaQuery(MEDIUM_DISPLAY_REQUIREMENT);
 
-  const isDisplaySmall = useMediaQuery("(max-width: 480px)");
+  const isDisplaySmall = useMediaQuery(SMALL_DISPLAY_REQUIREMENT);
 
   const [token, setToken] = React.useState(localStorage.getItem("token"));
 
@@ -84,7 +98,7 @@ function App() {
   const [isSavedMoviesApiErrorShown, setIsSavedMoviesApiErrorShown] = React.useState(false);
   const [savedMoviesApiMessage, setSavedMoviesApiMessage] = React.useState('');
 
-  const getUser = React.useCallback(async (token) => {
+  const getUser = React.useCallback(async () => {
 
     try {
 
@@ -98,25 +112,25 @@ function App() {
     } catch (err) {
       console.log(err);
     }
-  }, [])
+  }, [token])
 
   const calculateRequiredLength = React.useCallback(() => {
     let initialMoviesLength;
     let additionalMoviesLength;
 
     if (isDisplayMedium) {
-      initialMoviesLength = 8;
-      additionalMoviesLength = 2;
+      initialMoviesLength = MEDIUM_DISPLAY_LENGTH;
+      additionalMoviesLength = MEDIUM_DISPLAY_ADDITIONAL_LENGTH;
     }
 
     if (isDisplaySmall && isDisplayMedium) {
-      initialMoviesLength = 5;
-      additionalMoviesLength = 1;
+      initialMoviesLength = SMALL_DISPLAY_LENGTH;
+      additionalMoviesLength = SMALL_DISPLAY_ADDITIONAL_LENGTH;
     }
 
     if (isDisplayLarge) {
-      initialMoviesLength = 12;
-      additionalMoviesLength = 3;
+      initialMoviesLength = LARGE_DISPLAY_LENGTH;
+      additionalMoviesLength = LARGE_DISPLAY_ADDITIONAL_LENGTH;
     }
 
     return { initialMoviesLength, additionalMoviesLength };
@@ -182,6 +196,7 @@ function App() {
   const editUserInfo = React.useCallback(async ({ email, name }) => {
 
     try {
+
       setIsLoading(true);
 
       const newUserInfo = await api.editUserInfo(email, name, token);
@@ -195,7 +210,7 @@ function App() {
     } catch (err) {
       setEditProfileApiMessageType('error')
       setIsEditProfileApiMessageShown(true);
-      setEditProfileApiMessage('При обновлении профиля произошла ошибка');
+      setEditProfileApiMessage(`При обновлении профиля произошла ошибка: ${err.message}`);
 
       console.log(err);
     } finally {
@@ -217,7 +232,7 @@ function App() {
 
   }, [navigate])
 
-  const handleCardLikeClick = React.useCallback(async (movie, isLiked) => {
+  const handleCardLikeClick = React.useCallback(async (movie, isLiked, setIsLiked) => {
 
     try {
 
@@ -242,10 +257,11 @@ function App() {
         setSavedMovies([...savedMovies, newMovie]);
       }
 
+      setIsLiked(!isLiked);
     } catch (err) {
       console.log(err);
     }
-  }, [token, savedMovies, initialSavedMoviesArray])
+  }, [token, initialSavedMoviesArray, savedMovies])
 
   const handleCardDeleteClick = React.useCallback(async (movie) => {
 
@@ -253,6 +269,9 @@ function App() {
 
       const newMovie = await api.deleteMovie(movie._id, token);
 
+      setInitialSavedMoviesArray((state) => {
+        return state.filter((m) => m._id !== newMovie._id)
+      });
       setSavedMovies((state) => {
         return state.filter((m) => m._id !== newMovie._id)
       });
@@ -272,6 +291,26 @@ function App() {
       console.log(err);
     }
   }, [additionalMoviesLength, moviesLength])
+
+  const getInitialSavedMovies = React.useCallback(async () => {
+
+    if (isLoggedIn) {
+
+      try {
+
+        const initialSavedMovies = await api.getSavedMovies(token);
+
+        setInitialSavedMoviesArray(initialSavedMovies);
+        setSavedMovies(initialSavedMovies);
+
+      } catch (err) {
+        setSavedMoviesApiMessage('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз');
+        setIsSavedMoviesApiErrorShown(true);
+        console.log(err);
+      }
+    }
+
+  }, [isLoggedIn, token])
 
   const getSearchedMovies = React.useCallback(async (movieInput, isChecked) => {
 
@@ -309,27 +348,6 @@ function App() {
     }
   }, [])
 
-  const getInitialSavedMovies = React.useCallback(async () => {
-
-    if (isLoggedIn) {
-
-      try {
-
-        const initialSavedMovies = await api.getSavedMovies(token);
-
-        setInitialSavedMoviesArray(initialSavedMovies);
-
-        setSavedMovies(initialSavedMovies);
-
-      } catch (err) {
-        setSavedMoviesApiMessage('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз');
-        setIsSavedMoviesApiErrorShown(true);
-        console.log(err);
-      }
-    }
-
-  }, [token, isLoggedIn])
-
   const getSearchedSavedMovies = React.useCallback((movieInput, isChecked) => {
 
     try {
@@ -356,13 +374,10 @@ function App() {
   }, [initialSavedMoviesArray])
 
   React.useEffect(() => {
-    getUser(token)
-  }, [getUser, token])
-
-  React.useEffect(() => {
+    getUser();
     getInitialSavedMovies();
     setCalculatedLength();
-  }, [getInitialSavedMovies, setCalculatedLength])
+  }, [getUser, setCalculatedLength, getInitialSavedMovies, currentPath])
 
   return (
     <div className='app'>
@@ -370,7 +385,6 @@ function App() {
         <CurrentUserContext.Provider value={currentUser}>
           <CurrentPathContext.Provider value={currentPath}>
             <IsLoggedInContext.Provider value={isLoggedIn}>
-
               <Header />
 
               <Routes>
@@ -450,7 +464,6 @@ function App() {
               </Routes>
 
               <Footer />
-
             </IsLoggedInContext.Provider >
           </CurrentPathContext.Provider>
         </CurrentUserContext.Provider>

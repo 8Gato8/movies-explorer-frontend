@@ -23,8 +23,8 @@ function EditProfileForm({
 	const currentUser = React.useContext(CurrentUserContext);
 	const [isFormValid, setIsFormValid] = React.useState(false);
 
-	const name = useInput('', { isEmpty: true, minLength: 2, regexName });
-	const email = useInput('', { isEmpty: true, minLength: 2, regexEmail });
+	const name = useInput(currentUser.name, { isEmpty: true, minLength: 2, regexName });
+	const email = useInput(currentUser.email, { isEmpty: true, minLength: 2, regexEmail });
 
 	const onSubmit = (e) => {
 		e.preventDefault();

@@ -7,7 +7,7 @@ export const sortMovies = (movies, requiredLength) => {
 			return result;
 		}
 
-		result = [movies[i], ...result];
+		result = [...result, movies[i]];
 	}
 
 	return result;
