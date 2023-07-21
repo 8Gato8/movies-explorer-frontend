@@ -13,6 +13,7 @@ function Header() {
 	const currentPath = React.useContext(CurrentPathContext);
 
 	return (
+
 		<header className={`${isLoggedIn ? 'header' : 'header_theme_landing'} 
 		${currentPath === '/signup'
 				|| currentPath === '/signin'

@@ -220,11 +220,12 @@ function App() {
 
   const logout = React.useCallback(() => {
 
-    setIsLoggedIn(false);
-    setCurrentUser({ name: '', email: '', password: '' });
-
     localStorage.removeItem("token");
     localStorage.removeItem("storedMovies");
+
+    setToken(localStorage.getItem("token"));
+    setCurrentUser({ name: '', email: '', password: '' });
+    setIsLoggedIn(false);
 
     setMovies([]);
 

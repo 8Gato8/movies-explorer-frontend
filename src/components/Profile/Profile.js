@@ -1,5 +1,7 @@
 import React from 'react';
+
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+
 import EditProfileForm from '../EditProfileForm/EditProfileForm';
 
 import './Profile.css';
