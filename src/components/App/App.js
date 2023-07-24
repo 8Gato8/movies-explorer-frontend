@@ -63,6 +63,8 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(localStorage.getItem("token"));
   const [currentUser, setCurrentUser] = React.useState({});
 
+  const [isSavedMoviesSearchCompleted, setIsSavedMoviesSearchCompleted] = React.useState(false);
+
   const isDisplayLarge = useMediaQuery(LARGE_DISPLAY_REQUIREMENT);
 
   const isDisplayMedium = useMediaQuery(MEDIUM_DISPLAY_REQUIREMENT);
@@ -76,6 +78,8 @@ function App() {
   const [currentPath, setCurrentPath] = React.useState('');
 
   const storedMovies = JSON.parse(localStorage.getItem("storedMovies"));
+
+  const [initialMoviesArray, setInitialMoviesArray] = React.useState([]);
 
   const [initialSavedMoviesArray, setInitialSavedMoviesArray] = React.useState([]);
 
@@ -102,17 +106,20 @@ function App() {
 
     try {
 
-      const user = token ? await api.getUserInfo(token) : null;
-
-      if (user) {
-        setCurrentUser(user)
-        setIsLoggedIn(true);
+      if (token) {
+        if (!currentUser.name || !currentUser.email) {
+          const user = await api.getUserInfo(token);
+          if (user) {
+            setCurrentUser(user);
+            /* setIsLoggedIn(true); */
+          }
+        }
       }
 
     } catch (err) {
       console.log(err);
     }
-  }, [token])
+  }, [token, currentUser])
 
   const calculateRequiredLength = React.useCallback(() => {
     let initialMoviesLength;
@@ -224,7 +231,7 @@ function App() {
     localStorage.removeItem("storedMovies");
 
     setToken(localStorage.getItem("token"));
-    setCurrentUser({ name: '', email: '', password: '' });
+    setCurrentUser({});
     setIsLoggedIn(false);
 
     setMovies([]);
@@ -254,8 +261,8 @@ function App() {
 
       } else {
         newMovie = await api.addMovie(movie, token);
-        setInitialSavedMoviesArray([...initialSavedMoviesArray, newMovie]);
-        setSavedMovies([...savedMovies, newMovie]);
+        setInitialSavedMoviesArray([newMovie, ...initialSavedMoviesArray]);
+        setSavedMovies([newMovie, ...savedMovies]);
       }
 
       setIsLiked(!isLiked);
@@ -273,6 +280,7 @@ function App() {
       setInitialSavedMoviesArray((state) => {
         return state.filter((m) => m._id !== newMovie._id)
       });
+
       setSavedMovies((state) => {
         return state.filter((m) => m._id !== newMovie._id)
       });
@@ -293,37 +301,27 @@ function App() {
     }
   }, [additionalMoviesLength, moviesLength])
 
-  const getInitialSavedMovies = React.useCallback(async () => {
-
-    if (isLoggedIn) {
-
-      try {
-
-        const initialSavedMovies = await api.getSavedMovies(token);
-
-        setInitialSavedMoviesArray(initialSavedMovies);
-        setSavedMovies(initialSavedMovies);
-
-      } catch (err) {
-        setSavedMoviesApiMessage('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз');
-        setIsSavedMoviesApiErrorShown(true);
-        console.log(err);
-      }
-    }
-
-  }, [isLoggedIn, token])
-
   const getSearchedMovies = React.useCallback(async (movieInput, isChecked) => {
 
     try {
 
       setIsLoading(true);
 
-      const initialMovies = await bestFilmsApi.getBetFilmApiInfo();
+      let newMovies;
 
-      const newMovies = searchMovies(initialMovies, movieInput, isChecked);
+      if (initialMoviesArray.length > 0) {
+        newMovies = searchMovies(initialMoviesArray, movieInput, isChecked);
+      } else {
+
+        const initialMovies = await bestFilmsApi.getBetFilmApiInfo();
+        setInitialMoviesArray(initialMovies);
+
+        newMovies = searchMovies(initialMovies, movieInput, isChecked);
+      }
 
       setMovies(newMovies);
+
+
       if (newMovies.length === 0) {
 
         setMoviesApiMessage('Ничего не найдено');
@@ -336,9 +334,10 @@ function App() {
           movieInput,
           isChecked
         }
-        localStorage.setItem('storedMovies', JSON.stringify(storedMoviesData));
-      }
 
+        localStorage.setItem('storedMovies', JSON.stringify(storedMoviesData));
+
+      }
     } catch (err) {
       setMoviesApiMessage('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз');
       setIsMoviesApiErrorShown(true);
@@ -347,7 +346,33 @@ function App() {
     } finally {
       setIsLoading(false);
     }
-  }, [])
+  }, [initialMoviesArray])
+
+  const getInitialSavedMovies = React.useCallback(async () => {
+
+    if (isLoggedIn) {
+
+      try {
+
+        if (!isSavedMoviesSearchCompleted) {
+
+          const initialSavedMovies = await api.getSavedMovies(token);
+          setInitialSavedMoviesArray(initialSavedMovies);
+          setSavedMovies(initialSavedMovies);
+
+          setIsSavedMoviesSearchCompleted(true);
+        } else if (currentPath !== '/saved-movies') {
+          setSavedMovies(initialSavedMoviesArray);
+        }
+
+      } catch (err) {
+        setSavedMoviesApiMessage('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз');
+        setIsSavedMoviesApiErrorShown(true);
+        console.log(err);
+      }
+    }
+
+  }, [isLoggedIn, token, currentPath, initialSavedMoviesArray, isSavedMoviesSearchCompleted])
 
   const getSearchedSavedMovies = React.useCallback((movieInput, isChecked) => {
 
@@ -376,9 +401,15 @@ function App() {
 
   React.useEffect(() => {
     getUser();
-    getInitialSavedMovies();
+  }, [getUser])
+
+  React.useEffect(() => {
     setCalculatedLength();
-  }, [getUser, setCalculatedLength, getInitialSavedMovies, currentPath])
+  }, [setCalculatedLength])
+
+  React.useEffect(() => {
+    getInitialSavedMovies();
+  }, [getInitialSavedMovies, currentPath])
 
   return (
     <div className='app'>
@@ -419,6 +450,7 @@ function App() {
                       getSearchedMovies={getSearchedSavedMovies}
                       moviesLength={moviesLength}
                       isMoviesApiErrorShown={isSavedMoviesApiErrorShown}
+                      setIsSavedMoviesApiErrorShown={setIsSavedMoviesApiErrorShown}
                       moviesApiMessage={savedMoviesApiMessage}
                     />
                   }

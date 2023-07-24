@@ -18,6 +18,7 @@ function SavedMovies({
 	getSearchedMovies,
 	moviesLength,
 	isMoviesApiErrorShown,
+	setIsSavedMoviesApiErrorShown,
 	moviesApiMessage,
 }) {
 
@@ -30,6 +31,10 @@ function SavedMovies({
 	}, [setCurrentPath])
 
 	React.useEffect(() => {
+		setIsSavedMoviesApiErrorShown(false);
+	}, [setIsSavedMoviesApiErrorShown])
+
+	React.useEffect(() => {
 		onPathChange();
 	}, [onPathChange])
 
@@ -38,6 +43,7 @@ function SavedMovies({
 
 			<SearchForm
 				getSearchedMovies={getSearchedMovies}
+				savedMovies={savedMovies}
 			/>
 
 			{
