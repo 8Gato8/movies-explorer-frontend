@@ -5,23 +5,21 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 import Preloader from '../Preloader/Preloader';
 import ApiMessage from '../ApiMessage/ApiMessage';
 
-import './Movies.css';
+import './SavedMovies.css';
 
 import { IsLoadingContext } from '../../contexts/IsLoadingContext';
-
 import { sortMovies } from '../../utils/functions/sortMovies';
 
-function Movies({
+function SavedMovies({
 	movies,
 	setCurrentPath,
 	savedMovies,
-	handleCardLikeClick,
+	handleCardDeleteClick,
 	getSearchedMovies,
-	handleMoreButtonClick,
 	moviesLength,
 	isMoviesApiErrorShown,
+	setIsSavedMoviesApiErrorShown,
 	moviesApiMessage,
-	storedMovies
 }) {
 
 	const isLoading = React.useContext(IsLoadingContext);
@@ -29,8 +27,12 @@ function Movies({
 	const sortedMovies = sortMovies(movies, moviesLength);
 
 	const onPathChange = React.useCallback(() => {
-		setCurrentPath('/movies')
+		setCurrentPath('/saved-movies');
 	}, [setCurrentPath])
+
+	React.useEffect(() => {
+		setIsSavedMoviesApiErrorShown(false);
+	}, [setIsSavedMoviesApiErrorShown])
 
 	React.useEffect(() => {
 		onPathChange();
@@ -41,7 +43,7 @@ function Movies({
 
 			<SearchForm
 				getSearchedMovies={getSearchedMovies}
-				storedMovies={storedMovies}
+				savedMovies={savedMovies}
 			/>
 
 			{
@@ -51,13 +53,15 @@ function Movies({
 					:
 					(isMoviesApiErrorShown)
 						?
-						<ApiMessage additionalStyles='api-message_style_no-movies-found' isApiMessageShown={isMoviesApiErrorShown} apiMessage={moviesApiMessage} />
+						<ApiMessage
+							additionalStyles='api-message_style_no-movies-found'
+							isApiMessageShown={isMoviesApiErrorShown}
+							apiMessage={moviesApiMessage}
+						/>
 						:
 						<MoviesCardList
 							movies={movies}
-							hasMoreButton={true}
-							handleMoreButtonClick={handleMoreButtonClick}
-							moviesLength={moviesLength}
+							hasMoreButton={false}
 						>
 
 							{sortedMovies.map((movie, i) => (
@@ -70,21 +74,21 @@ function Movies({
 											director: movie.director,
 											duration: movie.duration,
 											movieId: movie.id,
-											thumbnail: `https://api.nomoreparties.co/${movie.image.formats.thumbnail.url}`,
-											image: `https://api.nomoreparties.co/${movie.image.url}`,
+											image: movie.image,
+											thumbnail: movie.thumbnail,
 											nameEN: movie.nameEN,
 											nameRU: movie.nameRU,
 											trailerLink: movie.trailerLink,
-											year: movie.year
+											year: movie.year,
+											_id: movie._id
 										}
 									}
 									key={i}
 									savedMovies={savedMovies}
-									buttonStyle={'like'}
-									handleCardLikeClick={handleCardLikeClick}
-								>
+									buttonStyle={'delete'}
+									handleCardDeleteClick={handleCardDeleteClick}
+								/>
 
-								</MoviesCard>
 							))}
 
 
@@ -94,4 +98,4 @@ function Movies({
 	)
 }
 
-export default Movies;
+export default SavedMovies;

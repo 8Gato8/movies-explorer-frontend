@@ -4,11 +4,15 @@ import AboutProject from '../AboutProject/AboutProject';
 import Techs from '../Techs/Techs';
 import StudentInfo from '../StudentInfo/StudentInfo';
 
-function Main({ setCurrentPath, currentPath }) {
+function Main({ setCurrentPath }) {
+
+	const onPathChange = React.useCallback(() => {
+		setCurrentPath('/')
+	}, [setCurrentPath])
 
 	React.useEffect(() => {
-		setCurrentPath(currentPath);
-	}, [setCurrentPath, currentPath])
+		onPathChange();
+	}, [onPathChange])
 
 	return (
 		<main className="main">

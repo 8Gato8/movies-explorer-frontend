@@ -1,19 +1,34 @@
 import React from 'react'
 import Form from '../Form/Form';
-import { regex } from '../../utils/regexEmailValidation';
-import { useInput } from '../../utils/validation';
+import { regexEmail } from '../../utils/constants/regexValidationVariables';
+import { useInput } from '../../utils/functions/useInput';
+
+import { Navigate } from 'react-router-dom';
 
 import './Login.css';
 
-function Login({ setCurrentPath, currentPath }) {
+import { IsLoggedInContext } from '../../contexts/IsLoggedInContext';
+
+function Login({
+	setCurrentPath,
+	setCurrentUser,
+	login,
+	isFormApiErrorShown,
+	formApiMessage
+}) {
+
+	const onPathChange = React.useCallback(() => {
+		setCurrentPath('/signin')
+	}, [setCurrentPath])
 
 	React.useEffect(() => {
-		setCurrentPath(currentPath);
-	}, [setCurrentPath, currentPath])
+		onPathChange();
+	}, [onPathChange])
 
+	const isLoggedIn = React.useContext(IsLoggedInContext);
 	const [isFormValid, setIsFormValid] = React.useState(false);
 
-	const email = useInput('', { isEmpty: true, minLength: 2, regex });
+	const email = useInput('', { isEmpty: true, minLength: 2, regexEmail });
 	const password = useInput('', { isEmpty: true, minLength: 2 });
 
 	React.useEffect(() => {
@@ -23,6 +38,10 @@ function Login({ setCurrentPath, currentPath }) {
 			setIsFormValid(false);
 		}
 	}, [email.isInputValid, password.isInputValid]);
+
+	if (isLoggedIn) {
+		return <Navigate to="/movies" />
+	}
 
 	return (
 		<main className="login">
@@ -34,6 +53,11 @@ function Login({ setCurrentPath, currentPath }) {
 				linkText={'Регистрация'}
 				isFormValid={isFormValid}
 				redirectionPath={'/signup'}
+				onSubmit={login}
+				formValues={{ email: email.value, password: password.value }}
+				setCurrentUser={setCurrentUser}
+				isFormApiErrorShown={isFormApiErrorShown}
+				formApiMessage={formApiMessage}
 			>
 
 				<fieldset className="form__fieldset">

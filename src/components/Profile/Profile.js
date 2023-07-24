@@ -1,10 +1,18 @@
 import React from 'react';
+
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+
 import EditProfileForm from '../EditProfileForm/EditProfileForm';
 
 import './Profile.css';
 
-function Profile({ setCurrentPath, currentPath, handleUserUpdate, logout }) {
+function Profile({
+	editUserInfo,
+	logout,
+	isEditProfileApiMessageShown,
+	editProfileApiMessage,
+	editProfileApiMessageType
+}) {
 
 	const currentUser = React.useContext(CurrentUserContext);
 	const [isEditFormOpen, setIsEditFormOpen] = React.useState(false);
@@ -13,10 +21,6 @@ function Profile({ setCurrentPath, currentPath, handleUserUpdate, logout }) {
 		setIsEditFormOpen(!isEditFormOpen);
 	}
 
-	React.useEffect(() => {
-		setCurrentPath(currentPath);
-	}, [setCurrentPath, currentPath])
-
 	return (
 		<div className="profile-wrapper">
 			<main className="profile">
@@ -24,7 +28,13 @@ function Profile({ setCurrentPath, currentPath, handleUserUpdate, logout }) {
 
 				{isEditFormOpen
 					?
-					<EditProfileForm handleUserUpdate={handleUserUpdate} toggleEditForm={toggleEditForm} />
+					<EditProfileForm
+						toggleEditForm={toggleEditForm}
+						editUserInfo={editUserInfo}
+						isEditProfileApiMessageShown={isEditProfileApiMessageShown}
+						editProfileApiMessage={editProfileApiMessage}
+						editProfileApiMessageType={editProfileApiMessageType}
+					/>
 					:
 					<>
 						<div className="profile__data">

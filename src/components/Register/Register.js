@@ -1,20 +1,34 @@
 import React from 'react';
 import Form from '../Form/Form';
-import { regex } from '../../utils/regexEmailValidation';
-import { useInput } from '../../utils/validation';
+import { regexEmail, regexName } from '../../utils/constants/regexValidationVariables';
+import { useInput } from '../../utils/functions/useInput';
+
+import { Navigate } from 'react-router-dom';
 
 import './Register.css';
 
-function Register({ setCurrentPath, currentPath }) {
+import { IsLoggedInContext } from '../../contexts/IsLoggedInContext';
+
+function Register({
+	setCurrentPath,
+	createUser,
+	isFormApiErrorShown,
+	formApiMessage,
+}) {
+
+	const onPathChange = React.useCallback(() => {
+		setCurrentPath('/signup')
+	}, [setCurrentPath])
 
 	React.useEffect(() => {
-		setCurrentPath(currentPath);
-	}, [setCurrentPath, currentPath])
+		onPathChange();
+	}, [onPathChange])
 
+	const isLoggedIn = React.useContext(IsLoggedInContext);
 	const [isFormValid, setIsFormValid] = React.useState(false);
 
-	const name = useInput('', { isEmpty: true, minLength: 2 });
-	const email = useInput('', { isEmpty: true, minLength: 2, regex });
+	const name = useInput('', { isEmpty: true, minLength: 2, regexName });
+	const email = useInput('', { isEmpty: true, minLength: 2, regexEmail });
 	const password = useInput('', { isEmpty: true, minLength: 2 });
 
 	React.useEffect(() => {
@@ -24,6 +38,10 @@ function Register({ setCurrentPath, currentPath }) {
 			setIsFormValid(false);
 		}
 	}, [name.isInputValid, email.isInputValid, password.isInputValid]);
+
+	if (isLoggedIn) {
+		return <Navigate to="/movies" />
+	}
 
 	return (
 		<main className="register">
@@ -35,6 +53,10 @@ function Register({ setCurrentPath, currentPath }) {
 				linkText={'Войти'}
 				isFormValid={isFormValid}
 				redirectionPath={'/signin'}
+				onSubmit={createUser}
+				formValues={{ name: name.value, email: email.value, password: password.value }}
+				isFormApiErrorShown={isFormApiErrorShown}
+				formApiMessage={formApiMessage}
 			>
 
 				<fieldset className="form__fieldset">
@@ -67,6 +89,7 @@ function Register({ setCurrentPath, currentPath }) {
 						>
 							{name.isMinLengthError && name.minLengthErrorMessage}
 							{name.isEmptyError && name.emptyErrorMessage}
+							{name.isNameValidationError && name.nameValidationMessage}
 						</span>
 
 					</label>
