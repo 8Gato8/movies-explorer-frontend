@@ -1,4 +1,4 @@
-#  Проект movies-explorer (frontend)
+#  movies-explorer (frontend)
 
 Сервис, в котором можно найти фильмы по запросу и сохранить в личном кабинете.
 
