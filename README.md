@@ -30,6 +30,12 @@
   - PerfectPixel
   - Figma
 
+## Как запустить проект
+
+`npm install` - для установки необходимых для функционирования проекта пакетов
+
+`npm run start` — запускает проект на локальном сервере
+
 ## Ссылки
 Адрес домена для frontend - [ссылка](https://gato.nomoredomains.rocks/)</br>
 Адрес домена для backend - [ссылка](https://gato.diploma.nomoredomains.rocks/)</br>
