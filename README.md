@@ -1,14 +1,35 @@
-# movies-explorer-frontend
-Frontend-часть приложения movies-explorer
+#  Дипломный проект. Курс "Веб-разработчик" от Яндекс.Практикум (frontend)
 
-Ссылка на макет
+Сервис, в котором можно найти фильмы по запросу и сохранить в личном кабинете.
 
-https://disk.yandex.ru/d/6-onXHg20d39-w
+## [Демонстрация сайта](https://gato.nomoredomains.rocks)
 
-Ссылка на pull-request
+![Превью проекта](./src/images/movies-preview.jpg)
 
-https://github.com/8Gato8/movies-explorer-frontend/pull/2
+**Было реализовано:** 
+- вёрстка компонентов на React;
+- логика и вёрстка главной страницы, страниц регистрации, авторизации, редактирования профиля, фильмов, сохранённых фильмов;
+- асинхронные GET- POST- PATCH- и DELETE-запросы к API;
+- фильтрация данных на стороне клиента;
+- авторизованные и неавторизованные состояния;
+- поиск фильмов и сохранение в профиле;
 
-Ссылка на деплой
+**Использованы следующие методы и технологии:**
+  - HTML
+  - CSS
+  - React
+  - Express
+  - MongoDB
+  - NodeJS
+  - API
+  - Nginx
+  - JWT
+  - Postman
+  - PerfectPixel
+  - Figma
 
-https://gato.nomoredomains.rocks/
+## Ссылки
+Код backend можно посмотреть по [ссылке](https://github.com/8Gato8/movies-explorer-api)
+
+## Статус проекта и планы по доработке
+Завершён. Доработки не планируются.
