@@ -31,7 +31,9 @@
   - Figma
 
 ## Ссылки
-Код backend можно посмотреть по [ссылке](https://github.com/8Gato8/movies-explorer-api)
+Адрес домена для frontend - [ссылка](https://gato.nomoredomains.rocks/)</br>
+Адрес домена для backend - [ссылка](https://gato.diploma.nomoredomains.rocks/)</br>
+Код backend - [ссылка на репозиторий](https://github.com/8Gato8/movies-explorer-api)
 
 ## Статус проекта и планы по доработке
 Завершён. Доработки не планируются.
