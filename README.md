@@ -38,7 +38,7 @@
 
 ## Ссылки
 
-Код backend в отдельном репозитории - [ссылка на репозиторий](https://github.com/8Gato8/movies-explorer-api)
+Репозиторий backend - [ссылка на репозиторий](https://github.com/8Gato8/movies-explorer-api)
 
 ## Статус проекта и планы по доработке
 Завершён. Доработки не планируются.
