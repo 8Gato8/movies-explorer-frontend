@@ -4,7 +4,7 @@
 
 ## [Демонстрация сайта](https://gato.nomoredomains.rocks)
 
-![Превью проекта](./src/images/movies-preview.jpg)
+![Превью проекта](./src/images/movies.jpg)
 
 **Функционал:** 
 - адаптивная вёрстка и логика следующих страниц:
